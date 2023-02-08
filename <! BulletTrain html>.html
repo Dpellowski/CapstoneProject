@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="intro.css">
+  <title>Bullet Train Ticket Website</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#tickets">Tickets</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section id="home">
+    <img src="BG.jpeg" alt="A bullet train">
+    <h1>Welcome to the Bullet Train Ticket Website</h1>
+    <p>Here you can find information about our routes and schedules, as well as purchase tickets for your next trip.</p>
+  </section>
+  <section id="tickets">
+    <h2>Purchase Tickets</h2>
+    <form action="submit-ticket-form" method="post">
+      <label for="route">Route:</label>
+      <select id="route" name="route">
+        <option value="route1">Route 1</option>
+        <option value="route2">Route 2</option>
+        <option value="route3">Route 3</option>
+      </select>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date">
+      <label for="time">Time:</label>
+      <input type="time" id="time" name="time">
+      <input type="submit" value="Purchase">
+    </form>
+  </section>
+  <section id="schedule">
+    <h2>Schedule</h2>
+    <table>
+      <tr>
+        <th>Route</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+      </tr>
+      <tr>
+        <td>Route 1</td>
+        <td>8:00 AM</td>
+        <td>10:00 AM</td>
+      </tr>
+      <tr>
+        <td>Route 2</td>
+        <td>9:00 AM</td>
+        <td>11:00 AM</td>
+      </tr>
+      <tr>
+        <td>Route 3</td>
+        <td>10:00 AM</td>
+        <td>12:00 PM</td>
+      </tr>
+    </table>
+  </section>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We are a bullet train company that operates on multiple routes. Our trains are fast, efficient, and comfortable. We strive to provide the best possible service to our customers.</p>
+  </section>
+  <section id="contact">
+    <h
