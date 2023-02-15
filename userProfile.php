@@ -195,7 +195,11 @@
         <a href="home.php">
           <img class="navbar-homeIcon" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" /></a>
         <a href="home.php">Home</a>
-        <a href="userpage.php">Playlist</a>
+        <a href="#ticket">Ticket</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+
       </div>
 
       <div class="dropdown">
