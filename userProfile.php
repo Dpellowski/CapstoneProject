@@ -192,9 +192,9 @@
   <header>
     <div class="navbar">
       <div class="navbar-container-left">
-        <a href="home.php">
+        <a href="Homepage.html">
           <img class="navbar-homeIcon" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" /></a>
-        <a href="home.php">Home</a>
+        <a href="Homepage.html">Home</a>
         <a href="#ticket">Ticket</a>
         <a href="#schedule">Schedule</a>
         <a href="#about">About Us</a>
@@ -203,11 +203,11 @@
       </div>
 
       <div class="dropdown">
-        <img class="dropbtn" src="https://pic.onlinewebfonts.com/svg/img_24787.png" style="width:40px;height:40px;">
+        <img class="dropbtn" src="http://cdn.onlinewebfonts.com/svg/img_569204.png" style="width:40px;height:40px;">
         <div class="dropdown-content">
-          <a href="user_setting.php">Account</a>
+          <a href="userProfile.php">Account</a>
           <a href="edit-profile.php">Security</a>
-          <a href="logout.php">Log out</a>
+          <a href="logout_msg.html">Log out</a>
         </div>
       </div>
     </div>
