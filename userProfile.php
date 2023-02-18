@@ -302,7 +302,7 @@
   </div>
   <br />
   <div class="bookhistorybtn_container">
-    <a href="#viewBookinghistory"><button type="submit" class="viewhistory" id="history" value="View Booking History">View Booking History</button></a>
+    <a href="view_bookingHistory.php"><button type="submit" class="viewhistory" id="history" value="View Booking History">View Booking History</button></a>
   </div>
   <br />
   <div class="refundbtn_container">
