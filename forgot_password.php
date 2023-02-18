@@ -115,6 +115,10 @@
         .navbar-container-left a:hover:not(:first-child) {
             font-weight: 700;
         }
+
+        .goback {
+            font-size: 19px;
+        }
     </style>
 </head>
 
@@ -153,6 +157,11 @@
     <br />
     <div class="submitbtn">
         <input type="submit" id="reset_PW_btn" name="reset_PW_btn" value="Reset password" />
+    </div>
+    <br />
+    <div class="goback">
+        <span>Go back to </span>
+        <a href="login.html">Log in</a>
     </div>
 </body>
 
