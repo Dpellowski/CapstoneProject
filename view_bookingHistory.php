@@ -250,7 +250,7 @@
     <h1 align="center">Booking History</h1>
     <br />
     <div class="requestbtn_container">
-        <a href="#request"><button type="submit" class="refundbtn" id="refund" value="Request Refund">Request Refund</button></a>
+        <a href="refund.php"><button type="submit" class="refundbtn" id="refund" value="Request Refund">Request Refund</button></a>
     </div>
     <br />
 
