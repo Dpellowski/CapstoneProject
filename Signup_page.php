@@ -158,7 +158,7 @@
   <h1 align="center">Sign Up</h1>
   <div align="center">
     <span>Already have an account?</span>
-    <a href="login.php">Log in</a>
+    <a href="login.html">Log in</a>
     <form action="#process-signup.php" method="POST">
       <table class="rightAlignTD">
         <tr>
