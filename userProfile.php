@@ -306,7 +306,7 @@
   </div>
   <br />
   <div class="refundbtn_container">
-    <a href="#request_refund"><button type="submit" class="refundbtn" id="refund" value="Request Refund">Request Refund</button></a>
+    <a href="refund.php"><button type="submit" class="refundbtn" id="refund" value="Request Refund">Request Refund</button></a>
   </div>
 </body>
 
