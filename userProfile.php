@@ -184,6 +184,78 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
+
+    table tr th:first-child {
+      text-align: right;
+      font-size: 20px;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    td {
+      padding-top: 1%;
+      padding-bottom: 1%;
+    }
+
+    .editbtn_container {
+      text-align: center;
+    }
+
+    .editbtn {
+      max-width: 350px;
+      min-width: 180px;
+      border-radius: 20px;
+      font-size: 20px;
+      width: 8%;
+      height: 40px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .editbtn:hover {
+      font-weight: bold;
+      background-color: rgb(45, 199, 45);
+    }
+
+    .bookhistorybtn_container {
+      text-align: center;
+    }
+
+    .viewhistory {
+      max-width: 350px;
+      min-width: 230px;
+      border-radius: 20px;
+      font-size: 20px;
+      width: 8%;
+      height: 40px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .viewhistory:hover {
+      font-weight: bold;
+      background-color: rgb(45, 199, 45);
+    }
+
+    .refundbtn_container {
+      text-align: center;
+    }
+
+    .refundbtn {
+      max-width: 350px;
+      min-width: 200px;
+      border-radius: 20px;
+      font-size: 20px;
+      width: 8%;
+      height: 40px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .refundbtn:hover {
+      font-weight: bold;
+      background-color: rgb(45, 199, 45);
+    }
   </style>
 
 </head>
@@ -213,6 +285,29 @@
     </div>
   </header>
   <h1 align="center">Account Overview</h1>
+
+  <table cellpadding="10" ; cellspacing="10" class="userinfo">
+    <tr>
+      <th>Username:</th>
+      <td>John Doe</td>
+    </tr>
+    <tr text-decoration="underline" ;>
+      <th>Email:</th>
+      <td>johndoe1@gmail.com</td>
+    </tr>
+  </table>
+  <br />
+  <div class="editbtn_container">
+    <a href="#editProfile"><button type="submit" class="editbtn" id="edit" value="Edit Profile">Edit Profile</button></a>
+  </div>
+  <br />
+  <div class="bookhistorybtn_container">
+    <a href="#viewBookinghistory"><button type="submit" class="viewhistory" id="history" value="View Booking History">View Booking History</button></a>
+  </div>
+  <br />
+  <div class="refundbtn_container">
+    <a href="#request_refund"><button type="submit" class="refundbtn" id="refund" value="Request Refund">Request Refund</button></a>
+  </div>
 </body>
 
 </html>
