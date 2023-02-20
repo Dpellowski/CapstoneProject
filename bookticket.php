@@ -44,7 +44,7 @@
             float: left;
             display: inline-grid;
             height: 100%;
-            grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr;
+            grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr 2fr;
         }
 
         .navbar-container-left a {
@@ -178,7 +178,8 @@
             background-color: #6278b9;
         }
 
-        button {
+        button,
+        input[type="submit"] {
             background-color: #3d6885;
             border: none;
             border-radius: 5px;
@@ -190,7 +191,8 @@
             text-transform: uppercase;
         }
 
-        button:hover {
+        button:hover,
+        input[type="submit"]:hover {
             background-color: #2980b9;
         }
 
@@ -244,14 +246,15 @@
                 <a href="bookticket.php">Book Ticket</a>
                 <a href="#">About Us</a>
                 <a href="#">Contact Us</a>
-            </div>
-            <div class="dropdown">
-                <img class="dropbtn" src="https://pic.onlinewebfonts.com/svg/img_24787.png" style="width:40px;height:40px;">
-                <div class="dropdown-content">
-                    <a href="user_setting.php">Account</a>
-                    <a href="edit-profile.php">Security</a>
-                    <a href="logout.php">Log out</a>
+                <div class="dropdown">
+                    <img class="dropbtn" src="https://pic.onlinewebfonts.com/svg/img_24787.png" style="width:40px;height:40px;">
+                    <div class="dropdown-content">
+                        <a href="user_setting.php">Account</a>
+                        <a href="edit-profile.php">Security</a>
+                        <a href="logout.php">Log out</a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </header>
@@ -329,11 +332,18 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label> Would you like to add food to your booking? </label> </td>
-                    <td><a href="foodoption.php">
-                            <button type="button" class="btnfood">Yes</button>
+                    <td><label for="food-options">Choose a food option:</label> </td>
+                    <td>
+                        <select id="food-options" name="food">
+                            <option value="halal">Halal ($15.99)</option>
+                            <option value="kosher">Kosher ($18.99)</option>
+                            <option value="meat">Meat ($20.99)</option>
+                            <option value="vegan">Vegan ($16.99)</option>
+                            <option value="vegetable">Vegetable ($12.99)</option>
+                        </select>
+                        <a href="foodoption.php">
+                            <button type="button" class="menu">View Menu</button>
                         </a>
-                        <button type="button" class="btnfood">No</button>
                     </td>
                 </tr>
                 <tr>
