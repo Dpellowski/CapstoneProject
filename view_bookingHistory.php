@@ -188,7 +188,7 @@
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
-            width: 80%;
+            width: 95%;
         }
 
         td,
@@ -230,8 +230,8 @@
                 <a href="Homepage.html">
                     <img class="navbar-homeIcon" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" /></a>
                 <a href="Homepage.html">Home</a>
-                <a href="#ticket">Ticket</a>
-                <a href="#schedule">Schedule</a>
+                <a href="bookticket.php">Ticket</a>
+                <a href="Trainschedule.php">Schedule</a>
                 <a href="#about">About Us</a>
                 <a href="#contact">Contact</a>
 
@@ -258,49 +258,59 @@
         <tr>
             <th>Date</th>
             <th>Time</th>
-            <th>Number of passenger</th>
+            <th>Train Name</th>
+            <th>Passenger(s)</th>
             <th>Starting location</th>
             <th>Destination</th>
             <th>One-way/Round-trip</th>
+            <th>Food Option</th>
             <th>Total price</th>
 
         </tr>
         <tr>
             <td>May 10</td>
             <td>10:30 AM</td>
+            <td>Acela Express </td>
             <td>2</td>
             <td>California_station1</td>
             <td>Nevada_station1</td>
             <td>Round-trip</td>
+            <td>Kosher</td>
             <td>$80</td>
 
         </tr>
         <tr>
             <td>August 5</td>
             <td>9:00 AM</td>
+            <td>Avelia Liberty</td>
             <td>2</td>
             <td>Pennsylvania_station2</td>
             <td>New York_station 1</td>
             <td>One-way</td>
+            <td>Kosher</td>
             <td>$200</td>
 
         </tr>
         <tr>
             <td>March 2</td>
             <td>11:00 AM</td>
+            <td>Avelia Liberty</td>
             <td>2</td>
             <td>California_station1</td>
             <td>Utah_station2</td>
             <td>Round-trip</td>
+            <td>Meat</td>
             <td>$100</td>
         </tr>
         <tr>
             <td>December 12</td>
             <td>1:30 PM</td>
+            <td>Acela Express</td>
             <td>2</td>
             <td>California_station1</td>
             <td>Utah_station2</td>
             <td>Round-trip</td>
+            <td>Meat</td>
             <td>$160</td>
         </tr>
     </table>
