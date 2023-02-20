@@ -188,7 +188,7 @@
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
-            width: 85%;
+            width: 90%;
         }
 
         td,
@@ -267,8 +267,8 @@
                 <a href="Homepage.html">
                     <img class="navbar-homeIcon" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" /></a>
                 <a href="Homepage.html">Home</a>
-                <a href="#ticket">Ticket</a>
-                <a href="#schedule">Schedule</a>
+                <a href="bookticket.php">Ticket</a>
+                <a href="Trainschedule.php">Schedule</a>
                 <a href="#about">About Us</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -299,6 +299,7 @@
             <th>One-way/Round-trip</th>
             <th>Total price</th>
             <th>Request refund?</th>
+            <th>Reason of the request</th>
 
         </tr>
         <tr>
@@ -310,6 +311,11 @@
             <td>Round-trip</td>
             <td>$80</td>
             <td><input type="checkbox" id="request" name="request"></td>
+            <td>
+                <label for="reason"></label></p>
+                <textarea id="reason" name="reason" rows="5" cols="50"></textarea>
+                <br>
+            </td>
 
         </tr>
         <tr>
@@ -321,6 +327,11 @@
             <td>One-way</td>
             <td>$200</td>
             <td><input type="checkbox" id="request" name="request"></td>
+            <td>
+                <label for="reason"></label></p>
+                <textarea id="reason" name="reason" rows="5" cols="50"></textarea>
+                <br>
+            </td>
 
         </tr>
         <tr>
@@ -332,6 +343,11 @@
             <td>Round-trip</td>
             <td>$100</td>
             <td><input type="checkbox" id="request" name="request"></td>
+            <td>
+                <label for="reason"></label></p>
+                <textarea id="reason" name="reason" rows="5" cols="50"></textarea>
+                <br>
+            </td>
         </tr>
         <tr>
             <td>December 12</td>
@@ -342,6 +358,11 @@
             <td>Round-trip</td>
             <td>$160</td>
             <td><input type="checkbox" id="request" name="request"></td>
+            <td>
+                <label for="reason"></label></p>
+                <textarea id="reason" name="reason" rows="5" cols="50"></textarea>
+                <br>
+            </td>
         </tr>
     </table>
     <br />
