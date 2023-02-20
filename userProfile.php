@@ -298,7 +298,7 @@
   </table>
   <br />
   <div class="editbtn_container">
-    <a href="#editProfile"><button type="submit" class="editbtn" id="edit" value="Edit Profile">Edit Profile</button></a>
+    <a href="edit-profile.php"><button type="submit" class="editbtn" id="edit" value="Edit Profile">Edit Profile</button></a>
   </div>
   <br />
   <div class="bookhistorybtn_container">
