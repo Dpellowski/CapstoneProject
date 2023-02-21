@@ -267,8 +267,8 @@
         <a href="Homepage.html">
           <img class="navbar-homeIcon" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" /></a>
         <a href="Homepage.html">Home</a>
-        <a href="#ticket">Ticket</a>
-        <a href="#schedule">Schedule</a>
+        <a href="bookticket.php">Ticket</a>
+        <a href="Trainschedule.php">Schedule</a>
         <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
 
@@ -298,7 +298,7 @@
   </table>
   <br />
   <div class="editbtn_container">
-    <a href="#editProfile"><button type="submit" class="editbtn" id="edit" value="Edit Profile">Edit Profile</button></a>
+    <a href="edit-profile.php"><button type="submit" class="editbtn" id="edit" value="Edit Profile">Edit Profile</button></a>
   </div>
   <br />
   <div class="bookhistorybtn_container">
