@@ -214,77 +214,122 @@
     </header>
     <main>
         <form>
+            <div class="image">
+                <img src="schedule.avif" alt="Train schedule">
+            </div>
             <table class="no-border">
                 <tr>
-                    <td><label for="departure">Departure:</label> <input type="text" id="departure" name="departure">
+                    <td> <label for="arrival">Arrival:</label>
+                        <select id="arrival">
+                            <option value="">Select Arrival Station</option>
+                            <option value="New York">New York</option>
+                            <option value="Chicago">Chicago</option>
+                            <option value="Denver">Denver</option>
+                            <option value="Salt Lake City">Salt Lake City</option>
+                            <option value="California">California</option>
+                        </select>
+                        <button type="submit">Search</button>
                     </td>
-                    <td> <label for="arrival">Arrival:</label> <input type="text" id="arrival" name="arrival"></td>
                 </tr>
             </table>
-            <button type="submit">Search</button>
         </form>
+        <?php
+        // $schedule = array(
+        //     array(
+        //         "train_number" => "001",
+        //         "departure_station" => "New York",
+        //         "arrival_station" => "Chicago",
+        //         "date" => "2023-02-17",
+        //         "departure_time" => "08:00",
+        //         "arrival_time" => "14:30"
+        //     ),
+        //     array(
+        //         "train_number" => "002",
+        //         "departure_station" => "Chicago",
+        //         "arrival_station" => "Denver",
+        //         "date" => "2023-02-18",
+        //         "departure_time" => "10:00",
+        //         "arrival_time" => "17:45"
+        //     ),
+        //     array(
+        //         "train_number" => "003",
+        //         "departure_station" => "Denver",
+        //         "arrival_station" => "Salt Lake City",
+        //         "date" => "2023-02-19",
+        //         "departure_time" => "09:30",
+        //         "arrival_time" => "13:45"
+        //     ),
+        //     array(
+        //         "train_number" => "004",
+        //         "departure_station" => "Salt Lake City",
+        //         "arrival_station" => "California",
+        //         "date" => "2023-02-20",
+        //         "departure_time" => "11:00",
+        //         "arrival_time" => "18:15"
+        //     )
+        // );
+        // foreach ($schedule as $train) {
+        //     echo "<tr>";
+        //     echo "<td>" . $train['train_number'] . "</td>";
+        //     echo "<td>" . $train['departure_station'] . "</td>";
+        //     echo "<td>" . $train['arrival_station'] . "</td>";
+        //     echo "<td>" . $train['date'] . "</td>";
+        //     echo "<td>" . $train['departure_time'] . "</td>";
+        //     echo "<td>" . $train['arrival_time'] . "</td>";
+        //     echo "<td><button class='book'>Book</button></td>";
+        //     echo "</tr>";
+        // } 
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Train Number</th>
-                    <th>Departure Station</th>
-                    <th>Arrival Station</th>
-                    <th>Date</th>
-                    <th>Departure Time</th>
-                    <th>Arrival Time</th>
-                    <th>Book Ticket</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $schedule = array(
-                    array(
-                        "train_number" => "001",
-                        "departure_station" => "New York",
-                        "arrival_station" => "Chicago",
-                        "date" => "2023-02-17",
-                        "departure_time" => "08:00",
-                        "arrival_time" => "14:30"
-                    ),
-                    array(
-                        "train_number" => "002",
-                        "departure_station" => "Chicago",
-                        "arrival_station" => "Denver",
-                        "date" => "2023-02-18",
-                        "departure_time" => "10:00",
-                        "arrival_time" => "17:45"
-                    ),
-                    array(
-                        "train_number" => "003",
-                        "departure_station" => "Denver",
-                        "arrival_station" => "Salt Lake City",
-                        "date" => "2023-02-19",
-                        "departure_time" => "09:30",
-                        "arrival_time" => "13:45"
-                    ),
-                    array(
-                        "train_number" => "004",
-                        "departure_station" => "Salt Lake City",
-                        "arrival_station" => "California",
-                        "date" => "2023-02-20",
-                        "departure_time" => "11:00",
-                        "arrival_time" => "18:15"
-                    )
-                );
-                foreach ($schedule as $train) {
-                    echo "<tr>";
-                    echo "<td>" . $train['train_number'] . "</td>";
-                    echo "<td>" . $train['departure_station'] . "</td>";
-                    echo "<td>" . $train['arrival_station'] . "</td>";
-                    echo "<td>" . $train['date'] . "</td>";
-                    echo "<td>" . $train['departure_time'] . "</td>";
-                    echo "<td>" . $train['arrival_time'] . "</td>";
-                    echo "<td><button class='book'>Book</button></td>";
-                    echo "</tr>";
-                } ?>
+        // Fetch train data from API endpoint
+        $apiEndpoint = "https://840b-2601-444-80-a6c0-9cbf-ef2e-45a7-8b16.ngrok.io/api/capstone/GetFoodOptions";
+        $trainDataJSON = file_get_contents($apiEndpoint);
+        $trainData = json_decode($trainDataJSON, true);
 
-            </tbody>
+        if (isset($_POST['arrival_station'])) {
+            $arrival_station = $_POST['arrival_station'];
+
+            // filter data to show searched station on top
+            usort($trainData, function ($a, $b) use ($arrival_station) {
+                if ($a['arrival_station'] == $arrival_station) {
+                    return -1;
+                } elseif ($b['arrival_station'] == $arrival_station) {
+                    return 1;
+                } else {
+                    return ($a['departure_time'] < $b['departure_time']) ? -1 : 1;
+                }
+            });
+        }
+
+        // print table
+        echo '<table>';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>Train Name</th>';
+        echo '<th>Departure Station</th>';
+        echo '<th>Arrival Station</th>';
+        echo '<th>Date</th>';
+        echo '<th>Departure Time</th>';
+        echo '<th>Arrival Time</th>';
+        echo '<th>Book Ticket</th>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+
+        foreach ($data as $train) {
+            echo '<tr>';
+            echo '<td>' . $train['train_name'] . '</td>';
+            echo '<td>' . $train['departure_station'] . '</td>';
+            echo '<td>' . $train['arrival_station'] . '</td>';
+            echo '<td>' . $train['date'] . '</td>';
+            echo '<td>' . $train['departure_time'] . '</td>';
+            echo '<td>' . $train['arrival_time'] . '</td>';
+            echo '<td><a href="booking.php?id=' . $train['id'] . '">Book</a></td>';
+            echo '</tr>';
+        }
+
+        echo '</tbody>';
+        echo '</table>';
+        ?>
     </main>
 </body>
 
