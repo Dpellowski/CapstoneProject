@@ -206,8 +206,8 @@
                 <a href="Homepage.html">Home</a>
                 <a href="Trainschedule.php">Train Schedule</a>
                 <a href="bookticket.php">Book Ticket</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact Us</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="contactus.html">Contact Us</a>
                 <a href="Signup_page.php">Login/Signup</a>
             </div>
         </div>

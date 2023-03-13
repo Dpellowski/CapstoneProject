@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bullet Train Website - Signup</title>
+    <style>
+        html {
+            margin: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: "Fredoka One";
+            letter-spacing: 2px;
+            font-size: 20px;
+            margin: 0;
+            height: 100%;
+            text-align: center;
+        }
+
+        .smallfont {
+            font-size: 12px;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table.rightAlignTD:first-child td {
+            text-align: right;
+        }
+
+        .buttonContainer {
+            border-radius: 20px;
+            font-size: 18px;
+            width: fit-content;
+            font-family: "Fredoka One";
+            letter-spacing: 2px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        h1 {
+            color: #81c784;
+            font-family: "Fredoka One";
+            letter-spacing: 5px;
+        }
+
+        .savework {
+            font-size: 19px;
+            font-family: "Fredoka One";
+            padding-block: 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            outline: none;
+            color: black;
+            background-color: #add8e6;
+            margin-top: 10px;
+        }
+
+        .savework:active {
+            background-color: #add8e6;
+            box-shadow: 0 2px #666;
+            transform: translateY(4px);
+        }
+
+        .savework:hover {
+            font-weight: bold;
+        }
+
+        td {
+            padding-top: 15px;
+        }
+
+        input[type="text"] {
+            font-size: 18px;
+        }
+
+        span {
+            font-size: 18px;
+        }
+
+        a {
+            font-size: 18px;
+        }
+
+        a:hover {
+            font-weight: bold;
+        }
+
+        header {
+            height: fit-content;
+            display: inline-flex;
+            width: 100%;
+        }
+
+        .navbar {
+            height: 100px;
+            display: inline-block;
+            flex-direction: row;
+            flex: 0 0 100%;
+            /* Let it fill the entire space horizontally */
+            width: 100%;
+        }
+
+        .navbar-homeIcon {
+            height: 100px;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-container-left img {
+            height: inherit;
+            width: 100%;
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .navbar-container-left {
+            float: left;
+            display: inline-grid;
+            height: 100%;
+            grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr;
+        }
+
+        .navbar-container-left a {
+            font-size: 20px;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .navbar-container-left a:hover:not(:first-child) {
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type=text],
+        input[type=email],
+        textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            font-size: 18px;
+            line-height: 1.5;
+            resize: none;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-container-left">
+                <a href="Homepage.html"><img class="navbar-homeIcon"
+                        src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" /></a>
+                <a href="Homepage.html">Home</a>
+                <a href="Trainschedule.php">Train Schedule</a>
+                <a href="bookticket.php">Book Ticket</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="contactus.html">Contact</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>Contact Us</h1>
+        <div class="container">
+            <form method="post" action="send-email.php">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
