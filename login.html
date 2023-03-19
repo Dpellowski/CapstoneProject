@@ -136,40 +136,48 @@
     <div>
       <h2>Log in</h2>
     </div>
-    <form action="#" method="post">
-      <div class="email_table">
-        <table>
-          <tr>
-            <th>Username/Email:</th>
-            <td>
-              <input
-                type="text"
-                name="login_user"
-                size="50"
-                placeholder="Enter your username/email address"
-                required="true"
-              />
-            </td>
-          </tr>
-          <tr>
-            <th>Password:</th>
-            <td>
-              <input
-                type="password"
-                name="login_password"
-                size="50"
-                placeholder="Enter your password"
-                required="true"
-              />
-            </td>
-          </tr>
-        </table>
-      </div>
-      <br />
-      <div class="submitbtn">
-        <input type="submit" id="loginbtn" name="request_login" value="Login" />
-      </div>
-    </form>
+
+    <div class="email_table">
+      <table>
+        <tr>
+          <th>Email:</th>
+          <td>
+            <input
+              type="text"
+              name="login_user"
+              size="50"
+              placeholder="Enter your username/email address"
+              required="true"
+              id="email"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>Password:</th>
+          <td>
+            <input
+              type="password"
+              name="login_password"
+              size="50"
+              placeholder="Enter your password"
+              required="true"
+              id="password"
+            />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <div class="submitbtn">
+      <input
+        onclick="returnText()"
+        type="submit"
+        id="loginbtn"
+        name="request_login"
+        value="Login"
+      />
+    </div>
+
     <br />
     <div class="forgot_password">
       <a href="forgot_password.php">Forgot password?</a>
@@ -178,5 +186,41 @@
     <div class="account_not_exist">
       <a href="Signup_page.php">Don't have an account?</a>
     </div>
+
+    <script>
+      let profile;
+      let url = "https://4cab-2601-444-80-a6c0-e09f-606e-8a7c-1401.ngrok.io/";
+      function returnText() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        fetch(url + "api/capstone/Login", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        })
+          .then((response) => response.json())
+          .then((response) => (profile = response))
+          .then((response) => loginCheck());
+      }
+      function loginCheck() {
+        if (profile.length > 0) {
+          console.log(profile);
+          if (profile.accountTypeSID == 2) {
+            //send to user profile
+          } else {
+            //send to admin page
+          }
+        } else {
+          //display error on the screen
+          console.log("Fail Login");
+        }
+      }
+    </script>
   </body>
 </html>
