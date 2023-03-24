@@ -175,6 +175,7 @@
             background-color: #ddd;
         }
 
+
         .book {
             background-color: #3d6885;
             color: white;
@@ -194,7 +195,66 @@
                 font-size: 12px;
             }
         }
+
+        div[image] {
+            flex: 1;
+            max-width: 50%;
+            padding: 24px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            /* Center align table */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: #1abc9c;
+            color: white;
+            text-align: left;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Button style */
+        button {
+            background-color: #1abc9c;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #16a085;
+        }
     </style>
+
 </head>
 
 <body>
@@ -212,125 +272,61 @@
             </div>
         </div>
     </header>
-    <main>
-        <form>
-            <div class="image">
-                <img src="schedule.avif" alt="Train schedule">
-            </div>
-            <table class="no-border">
-                <tr>
-                    <td> <label for="arrival">Arrival:</label>
-                        <select id="arrival">
-                            <option value="">Select Arrival Station</option>
-                            <option value="New York">New York</option>
-                            <option value="Chicago">Chicago</option>
-                            <option value="Denver">Denver</option>
-                            <option value="Salt Lake City">Salt Lake City</option>
-                            <option value="California">California</option>
-                        </select>
-                        <button type="submit">Search</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
-        <?php
-        // $schedule = array(
-        //     array(
-        //         "train_number" => "001",
-        //         "departure_station" => "New York",
-        //         "arrival_station" => "Chicago",
-        //         "date" => "2023-02-17",
-        //         "departure_time" => "08:00",
-        //         "arrival_time" => "14:30"
-        //     ),
-        //     array(
-        //         "train_number" => "002",
-        //         "departure_station" => "Chicago",
-        //         "arrival_station" => "Denver",
-        //         "date" => "2023-02-18",
-        //         "departure_time" => "10:00",
-        //         "arrival_time" => "17:45"
-        //     ),
-        //     array(
-        //         "train_number" => "003",
-        //         "departure_station" => "Denver",
-        //         "arrival_station" => "Salt Lake City",
-        //         "date" => "2023-02-19",
-        //         "departure_time" => "09:30",
-        //         "arrival_time" => "13:45"
-        //     ),
-        //     array(
-        //         "train_number" => "004",
-        //         "departure_station" => "Salt Lake City",
-        //         "arrival_station" => "California",
-        //         "date" => "2023-02-20",
-        //         "departure_time" => "11:00",
-        //         "arrival_time" => "18:15"
-        //     )
-        // );
-        // foreach ($schedule as $train) {
-        //     echo "<tr>";
-        //     echo "<td>" . $train['train_number'] . "</td>";
-        //     echo "<td>" . $train['departure_station'] . "</td>";
-        //     echo "<td>" . $train['arrival_station'] . "</td>";
-        //     echo "<td>" . $train['date'] . "</td>";
-        //     echo "<td>" . $train['departure_time'] . "</td>";
-        //     echo "<td>" . $train['arrival_time'] . "</td>";
-        //     echo "<td><button class='book'>Book</button></td>";
-        //     echo "</tr>";
-        // } 
+    <form>
+        <div class="image">
+            <img src="schedule.avif" alt="Train schedule">
+        </div>
+        <table class="no-border">
+            <tr>
+                <td> <label for="arrival">Arrival:</label>
+                    <select id="arrival">
+                        <option value="">Select Arrival Station</option>
+                        <option value="New York">New York</option>
+                        <option value="Chicago">Chicago</option>
+                        <option value="Denver">Denver</option>
+                        <option value="Salt Lake City">Salt Lake City</option>
+                        <option value="California">California</option>
+                    </select>
+                    <button type="submit">Search</button>
+                </td>
+            </tr>
+        </table>
+    </form>
 
-        // Fetch train data from API endpoint
-        $apiEndpoint = "https://840b-2601-444-80-a6c0-9cbf-ef2e-45a7-8b16.ngrok.io/api/capstone/GetFoodOptions";
-        $trainDataJSON = file_get_contents($apiEndpoint);
-        $trainData = json_decode($trainDataJSON, true);
+    <script>
+        fetch(
+                'https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/api/capstone/GetTicketsByLocation?destination=Chicago', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+            .then(response => response.json())
+            .then(data => {
+                const filteredData = data.filter(schedule => {
+                    const departTime = new Date(schedule.departTime);
+                    const currentTime = new Date();
+                    const timeDiff = (departTime - currentTime) / (1000 * 60 * 60); // Convert to hours
+                    return timeDiff >= 1;
+                });
 
-        if (isset($_POST['arrival_station'])) {
-            $arrival_station = $_POST['arrival_station'];
+                // Render the filtered data in a table
+                const table = document.createElement('table');
+                const headerRow = table.insertRow();
+                headerRow.innerHTML =
+                    '<th>TrainSID</th><th>Seat Number</th><th>Destination</th><th>Depart Time</th><th>Arrival Time</th>';
 
-            // filter data to show searched station on top
-            usort($trainData, function ($a, $b) use ($arrival_station) {
-                if ($a['arrival_station'] == $arrival_station) {
-                    return -1;
-                } elseif ($b['arrival_station'] == $arrival_station) {
-                    return 1;
-                } else {
-                    return ($a['departure_time'] < $b['departure_time']) ? -1 : 1;
-                }
-            });
-        }
+                filteredData.forEach(schedule => {
+                    const row = table.insertRow();
+                    row.innerHTML =
+                        `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
+                });
 
-        // print table
-        echo '<table>';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th>Train Name</th>';
-        echo '<th>Departure Station</th>';
-        echo '<th>Arrival Station</th>';
-        echo '<th>Date</th>';
-        echo '<th>Departure Time</th>';
-        echo '<th>Arrival Time</th>';
-        echo '<th>Book Ticket</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-
-        foreach ($data as $train) {
-            echo '<tr>';
-            echo '<td>' . $train['train_name'] . '</td>';
-            echo '<td>' . $train['departure_station'] . '</td>';
-            echo '<td>' . $train['arrival_station'] . '</td>';
-            echo '<td>' . $train['date'] . '</td>';
-            echo '<td>' . $train['departure_time'] . '</td>';
-            echo '<td>' . $train['arrival_time'] . '</td>';
-            echo '<td><a href="booking.php?id=' . $train['id'] . '">Book</a></td>';
-            echo '</tr>';
-        }
-
-        echo '</tbody>';
-        echo '</table>';
-        ?>
-    </main>
+                document.body.appendChild(table);
+            })
+            .catch(error => console.error(error));
+    </script>
 </body>
 
 </html>
