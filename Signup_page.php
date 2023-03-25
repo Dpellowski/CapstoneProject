@@ -58,6 +58,7 @@
       color: black;
       background-color: #add8e6;
       margin-top: 10px;
+
     }
 
     .savework:active {
@@ -159,86 +160,58 @@
   <div align="center">
     <span>Already have an account?</span>
     <a href="login.html">Log in</a>
-    <form action="#process-signup.php" method="POST">
-      <table class="rightAlignTD">
-        <tr>
-          <td><label for="username">Username:</label></td>
-          <td>
-            <input title="Enter desired username" id="username" type="text" name="uname" required="true" spellcheck="false" />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="fname">First Name:</label></td>
-          <td>
-            <input title="Enter your first name" id="fname" type="text" name="fname" required="true" spellcheck="false" />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="lname">Last Name:</label></td>
-          <td>
-            <input title="Enter your last name" id="lname" type="text" name="lname" required="true" spellcheck="false" />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="email">Email:</label></td>
-          <td>
-            <input title="Enter valid email address" id="email" type="text" name="email" required="true" spellcheck="false" pattern="[a-zA-Z0-9._]+@[a-z].+[a-z]" />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="email_confirm">Email Confirmation:</label></td>
-          <td>
-            <input title="Enter valid email address" id="email_confirm" type="text" name="email_confirm" required="true" spellcheck="false" pattern="[a-zA-Z0-9._]+@[a-z].+[a-z]" />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="password">Password:</label></td>
-          <td>
-            <input title="Enter desired password" id="password" type="text" name="password" required="true" spellcheck="false" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="password_confirm">Password Confirmation:</label>
-          </td>
-          <td>
-            <input title="Reenter password" id="password_confirm" type="text" name="password_confirm" required="true" spellcheck="false" />
-          </td>
-        </tr>
-      </table>
-      <br />
-      <input class="savework" type="submit" name="requestPassword" value="Create Account" />
-    </form>
+    <table class="rightAlignTD">
+      <tr>
+        <td><label for="username">Username:</label></td>
+        <td>
+          <input title="Enter desired username" id="username" type="text" name="username" required="true" spellcheck="false" />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="fname">First Name:</label></td>
+        <td>
+          <input title="Enter your first name" id="fname" type="text" name="fname" required="true" spellcheck="false" />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="lname">Last Name:</label></td>
+        <td>
+          <input title="Enter your last name" id="lname" type="text" name="lname" required="true" spellcheck="false" />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="email">Email:</label></td>
+        <td>
+          <input title="Enter valid email address" id="email" type="text" name="email" required="true" spellcheck="false" pattern="[a-zA-Z0-9._]+@[a-z].+[a-z]" />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="email_confirm">Email Confirmation:</label></td>
+        <td>
+          <input title="Enter valid email address" id="email_confirm" type="text" name="email_confirm" required="true" spellcheck="false" pattern="[a-zA-Z0-9._]+@[a-z].+[a-z]" />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="password">Password:</label></td>
+        <td>
+          <input title="Enter desired password" id="password" type="text" name="password" required="true" spellcheck="false" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="password_confirm">Password Confirmation:</label>
+        </td>
+        <td>
+          <input title="Reenter password" id="password_confirm" type="text" name="password_confirm" required="true" spellcheck="false" />
+        </td>
+      </tr>
+    </table>
+    <br />
+    <input class="savework" type="submit" onclick="newUser()" name="requestPassword" value="Create Account" />
   </div>
-  <?php
-  function insertNewUser($username, $first_name, $last_name, $newEmail, $user_password)
-  {
-    $db = mysqli_connect("15.204.58.45", "sa", "Qwerty2@");
+  <script src="signup.js">
 
-    if (mysqli_connect_errno()) {
-      echo "<p>Error: Could not register user.<br/>
-              Please try again later.</p>";
-      exit;
-    }
-    $query = "INSERT INTO users(username, first_name, last_name, user_email, user_password)
-        VALUES(?, ?, ?, ?, ?)";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param('sssss', $username, $first_name, $last_name, $newEmail, $user_password);
-    $stmt->execute();
-
-    if ($stmt->affected_rows > 0) {
-      echo 'Username: ' . $username . '<br>';
-      echo 'First name: ' . $first_name . '<br>';
-      echo 'Last name: ' . $last_name . '<br>';
-      echo 'Email: ' . $newEmail . '<br>';
-    } else {
-      echo "<p>An error has occurred.<br/>
-               Could not sign up.</p>";
-    }
-
-    $db->close();
-  }
-  ?>
+  </script>
 </body>
 
 </html>
