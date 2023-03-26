@@ -126,12 +126,14 @@
     <header>
         <div class="navbar">
             <div class="navbar-container-left">
-                <a href="Homepage.html"><img class="navbar-homeIcon" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" /></a>
-                <a href="Homepage.html">Home</a>
-                <a href="bookticket.php">Ticket</a>
-                <a href="Trainschedule.php">Schedule</a>
-                <a href="#about">About Us</a>
-                <a href="#contact">Contact</a>
+                <a href="index.html">
+                    <img class="logo" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" alt="Logo"></a>
+
+                <a href="index.html">Home</a>
+                <a href="Trainschedule.php">Train Schedule</a>
+                <a href="bookticket.html">Book Ticket</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="contactus.html">Contact Us</a>
             </div>
         </div>
     </header>

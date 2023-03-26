@@ -65,6 +65,53 @@
             font-weight: 700;
         }
 
+        .dropdown {
+            float: right;
+            overflow: hidden;
+            height: inherit;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: black;
+            padding: 13px 40px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .dropdown:hover .dropbtn {
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
         main {
             display: flex;
             flex-direction: column;
@@ -80,6 +127,10 @@
             margin: 20px 0;
         }
 
+        img {
+            size: 30%;
+        }
+
         input[type="text"] {
             padding: 10px;
             margin: 10px;
@@ -90,6 +141,9 @@
         .no-border {
             border: 0;
         }
+
+
+
 
         th {
             border: 1px solid black;
@@ -261,20 +315,28 @@
     <header>
         <div class="navbar">
             <div class="navbar-container-left">
-                <a href="Homepage.html"> <img class="logo" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" alt="Logo"></a>
+                <a href="index.html">
+                    <img class="logo" src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp" alt="Logo"></a>
 
-                <a href="Homepage.html">Home</a>
+                <a href="index.html">Home</a>
                 <a href="Trainschedule.php">Train Schedule</a>
-                <a href="bookticket.php">Book Ticket</a>
+                <a href="bookticket.html">Book Ticket</a>
                 <a href="aboutus.html">About Us</a>
                 <a href="contactus.html">Contact Us</a>
-                <a href="Signup_page.php">Login/Signup</a>
+                <div class="dropdown">
+                    <img class="dropbtn" src="https://pic.onlinewebfonts.com/svg/img_24787.png" style="width:40px;height:40px;">
+                    <div class="dropdown-content">
+                        <a href="userProfile.php">Account</a>
+                        <a href="edit-profile.php">Security</a>
+                        <a href="logout_msg.html">Log out</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
     <form>
         <div class="image">
-            <img src="schedule.avif" alt="Train schedule">
+            <img src="https://blog.bit.ai/wp-content/uploads/2020/07/schedule-concept-illustration_114360-1531.jpg" alt="Train schedule" style="size: 30%">
         </div>
         <table class="no-border">
             <tr>
@@ -295,7 +357,7 @@
 
     <script>
         fetch(
-                'https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/api/capstone/GetTicketsByLocation?destination=Chicago', {
+                'https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/api/capstone/GetTicketsByLocation?destination=chicago', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
