@@ -12,9 +12,8 @@ function returnText() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email: email,
-      password: password,
-      
+       email: email,
+       password: password,
     }),
   })
     .then((response) => response.json())
@@ -27,7 +26,7 @@ function loginCheck() {
     console.log(profile);
     if ((profile.accountTypeSID = 2)) {
       window.location.replace(
-        "http://localhost/ICS499_CapstoneProject/CapstoneProject/index.html"
+        "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.php"
       );
     } else {
       //send to admin page
@@ -37,3 +36,5 @@ function loginCheck() {
     console.log("Fail Login");
   }
 }
+
+

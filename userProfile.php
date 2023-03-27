@@ -257,10 +257,14 @@
       background-color: rgb(45, 199, 45);
     }
   </style>
+  <!-- <script src="signup.js"></script> -->
+  <script src="login.js">
+  </script>
+
 
 </head>
 
-<body>
+<body onload="display()">
   <header>
     <div class="navbar">
       <div class="navbar-container-left">
@@ -288,12 +292,21 @@
 
   <table cellpadding="10" ; cellspacing="10" class="userinfo">
     <tr>
-      <th>Username:</th>
-      <td>John Doe</td>
+      <th>Username: </th>
+      <td>
+      </td>
     </tr>
     <tr text-decoration="underline" ;>
       <th>Email:</th>
-      <td>johndoe1@gmail.com</td>
+      <td>
+        <script>
+          function display() {
+            if (document.getElementById("email") != null) {
+              document.write(email);
+            }
+          }
+        </script>
+      </td>
     </tr>
   </table>
   <br />
