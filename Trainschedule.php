@@ -113,6 +113,7 @@
 
 
         main {
+            justify-content: center;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -334,7 +335,7 @@
             </div>
         </div>
     </header>
-    <form>
+    <main>
         <div class="image">
             <img src="https://blog.bit.ai/wp-content/uploads/2020/07/schedule-concept-illustration_114360-1531.jpg" alt="Train schedule" style="size: 30%">
         </div>
@@ -349,46 +350,13 @@
                         <option value="Salt Lake City">Salt Lake City</option>
                         <option value="California">California</option>
                     </select>
-                    <button type="submit">Search</button>
+                    <button type="submit" onclick="getschedule()" value="Search">Search</button>
                 </td>
             </tr>
         </table>
-    </form>
-
-    <script>
-        fetch(
-                'https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/api/capstone/GetTicketsByLocation?destination=chicago', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                })
-            .then(response => response.json())
-            .then(data => {
-                const filteredData = data.filter(schedule => {
-                    const departTime = new Date(schedule.departTime);
-                    const currentTime = new Date();
-                    const timeDiff = (departTime - currentTime) / (1000 * 60 * 60); // Convert to hours
-                    return timeDiff >= 1;
-                });
-
-                // Render the filtered data in a table
-                const table = document.createElement('table');
-                const headerRow = table.insertRow();
-                headerRow.innerHTML =
-                    '<th>TrainSID</th><th>Seat Number</th><th>Destination</th><th>Depart Time</th><th>Arrival Time</th>';
-
-                filteredData.forEach(schedule => {
-                    const row = table.insertRow();
-                    row.innerHTML =
-                        `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
-                });
-
-                document.body.appendChild(table);
-            })
-            .catch(error => console.error(error));
-    </script>
+        <script src="Signup.js">
+        </script>
+    </main>
 </body>
 
 </html>

@@ -270,7 +270,7 @@
             margin-top: 20px;
         }
     </style>
-    <!-- <script src="Signup.js"></script> -->
+    <script src="Signup.js"></script>
 
 </head>
 
@@ -316,7 +316,7 @@
                 <option value="Salt Lake City">Salt Lake City</option>
                 <option value="California">California</option>
             </select>
-            <input type="submit" value="Search">
+            <input onclick="getselectedschedule()" type="submit" value="Search">
         </form>
         <div id="schedule-box">
             <table id="schedule-table">
@@ -332,62 +332,9 @@
                 <tbody></tbody>
             </table>
         </div>
-        <form method="POST" id="form">
+        <form id="form">
             <label id="selected-schedule-label"></label>
-            <script>
-                const searchForm = document.querySelector('#search-form');
-                const scheduleBox = document.querySelector('#schedule-box');
-                const scheduleTableBody = document.querySelector('#schedule-table tbody');
-                const selectedScheduleLabel = document.querySelector('#selected-schedule-label');
 
-                searchForm.addEventListener('submit', event => {
-                    event.preventDefault();
-                    const destination = searchForm.elements.destination.value;
-
-                    fetch('https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/api/capstone/GetTicketsByLocation?destination=' +
-                        destination, {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            const filteredData = data.filter(schedule => {
-                                const departTime = new Date(schedule.departTime);
-                                const currentTime = new Date();
-                                const timeDiff = (departTime - currentTime) / (1000 * 60 *
-                                    60); // Convert to hours
-                                return timeDiff >= 1;
-                            });
-
-                            // Clear existing table rows
-                            scheduleTableBody.innerHTML = '';
-
-                            // Render the filtered data in the table
-                            filteredData.forEach(schedule => {
-                                const row = document.createElement('tr');
-                                row.innerHTML =
-                                    `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
-                                row.addEventListener('click', () => {
-                                    const scheduleID = (schedule.sID);
-                                    selectedScheduleLabel.textContent =
-                                        `Selected Schedule: ${schedule.trainSID} ${schedule.seatNumber} (${schedule.departTime} - ${schedule.arrivalTime})`;
-                                });
-                                scheduleTableBody.appendChild(row);
-                            });
-
-                            scheduleBox.style.display = 'block';
-                        })
-                        .catch(error => console.error(error));
-                });
-            </script>
-            <!-- <script>
-                function seeschedule(arrival){
-                    getschedule(arrival);
-                }
-            </script> -->
             <table class="class">
                 <tr>
                     <td> <label for="class">Class:</label></td>
@@ -416,11 +363,12 @@
                         <td> <label for="food-options">Choose a food option:</label></td>
                         <td>
                             <select id="food-options" name="food">
-                                <option value="halal">Halal ($15.99)</option>
-                                <option value="kosher">Kosher ($18.99)</option>
-                                <option value="meat">Meat ($20.99)</option>
-                                <option value="vegan">Vegan ($16.99)</option>
-                                <option value="vegetable">Vegetable ($12.99)</option>
+                                <option value="selectfood" sid="null">select food</option>
+                                <option value="halal" sid="1">Halal ($15.99)</option>
+                                <option value="kosher" sid="2">Kosher ($18.99)</option>
+                                <option value="meat" sid="3">Meat ($20.99)</option>
+                                <option value="vegan" sid="4">Vegan ($16.99)</option>
+                                <option value="vegetable" sid="5">Vegetable ($12.99)</option>
                             </select>
                         </td>
                     </tr>
@@ -460,49 +408,10 @@
 
                 </table>
             </div>
-            <button onclick="book()" type="submit" value="Book Now">Book Now</button>
+            <button onclick="purchaseticket()" type="submit" value="Book Now">Book Now</button>
             <!-- //<input type="submit" value="Book Now"> -->
         </form>
         </div>
-        <script>
-            // let url = "https://4cab-2601-444-80-a6c0-e09f-606e-8a7c-1401.ngrok.io/";
-            // const form = document.querySelector('form');
-            // const submitButton = document.querySelector('button[type="submit"]');
-
-            // submitButton.addEventListener('click', (event) => {
-            //     event.preventDefault(); // prevent form submission
-
-            //     const formData = {
-            //         schedule: scheduleID, // selected schedule object from previous code
-            //         // class: form.elements.class.value,
-            //         passengerName: form.elements.passenger_name.value,
-            //         passengerEmail: form.elements.passenger_email.value,
-            //         foodOption: form.elements.food.value,
-            //     };
-
-            //     fetch(url + 'api/capstone/GetAccountTickets', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify(formData)
-            //     })
-            //         .then(response => response.json())
-            //         .then(data => {
-            //             console.log(data); // log the response data
-            //             // display success message to the user
-            //             const successMsg = document.createElement('p');
-            //             successMsg.textContent = 'Ticket booked successfully!';
-            //             document.body.appendChild(successMsg);
-            //             // redirect user to ticket confirmation page
-            //             window.location.href = 'ticket.html';
-            //         })
-            //         .catch(error => {
-            //             console.error('Error:', error);
-            //             alert('An error occurred. Please try again later.');
-            //         });
-            // });
-        </script>
     </main>
 </body>
 
