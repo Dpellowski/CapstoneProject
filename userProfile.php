@@ -302,7 +302,7 @@
         <script>
           function display() {
             if (document.getElementById("email") != null) {
-              document.write(email);
+              document.getElementById("email").innerHTML;
             }
           }
         </script>
