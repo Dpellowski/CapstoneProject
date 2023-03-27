@@ -23,18 +23,22 @@ function returnText() {
 
 function loginCheck() {
   if (profile.length > 0) {
-    console.log(profile);
+    // console.log(profile);
+    let profileJson = JSON.stringify(profile);
+    localStorage.setItem("profile", profileJson);
+    console.log(localStorage.getItem("profile"));
     if ((profile.accountTypeSID = 2)) {
       window.location.replace(
-        "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.php"
+        "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.html"
       );
     } else {
       //send to admin page
     }
   } else {
     //display error on the screen
-    console.log("Fail Login");
+    alert("Login Failed");
   }
 }
+
 
 
