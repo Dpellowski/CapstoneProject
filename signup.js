@@ -59,7 +59,6 @@ function getschedule() {
     .then(response => response.json())
     .then(data => {
       const filteredData = data.filter(schedule => {
-        scheduleID = new Date(schedule.sid);
         const departTime = new Date(schedule.departTime);
         const currentTime = new Date();
         const timeDiff = (departTime - currentTime) / (1000 * 60 * 60); // Convert to hours
@@ -109,6 +108,7 @@ function getselectedschedule() {
       .then(response => response.json())
       .then(data => {
         const filteredData = data.filter(schedule => {
+          selectedscheduleID = new Date(schedule.sID);
           const departTime = new Date(schedule.departTime);
           const currentTime = new Date();
           const timeDiff = (departTime - currentTime) / (1000 * 60 *
@@ -125,7 +125,6 @@ function getselectedschedule() {
           row.innerHTML =
             `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
           row.addEventListener('click', () => {
-            selectedscheduleID = (schedule.sID);
             selectedScheduleLabel.textContent =
               `Selected Schedule: ${schedule.trainSID} ${schedule.seatNumber} (${schedule.departTime} - ${schedule.arrivalTime})`;
           });
@@ -145,10 +144,11 @@ function purchaseticket() {
   // add an event listener to the form submit event
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    let food = form.elements.food.value;
 
     // get the selected food option sid
-    const selectedOption = foodOptionsid.options[foodOptionsid.selectedIndex];
-    const foodOptionSID = selectedOption.getAttribute('sid');
+    // const selectedOption = foodOptionsid.options[foodOptionsid.selectedIndex];
+    // const foodOptionSID = selectedOption.getAttribute('sid');
 
     // check that all required variables are defined
     if (!selectedscheduleID) {
@@ -159,7 +159,7 @@ function purchaseticket() {
       console.error('profile or profile.accountSID is undefined');
       return;
     }
-    if (!foodOptionSID) {
+    if (!food) {
       console.error('foodOptionSID is undefined');
       return;
     }
@@ -175,7 +175,7 @@ function purchaseticket() {
       body: JSON.stringify({
         ticketSID: selectedscheduleID,
         accountSID: profile.accountSID,
-        foodOptionSID: foodOptionSID,
+        foodOptionSID: food,
       }),
     })
       .then(response => response.json())
