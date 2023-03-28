@@ -1,8 +1,11 @@
 let profile;
 let url = "https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/";
+let table;
 let tableprinted = false;// flag variable
 let selectedscheduleID;
 let ticketdata;
+let scheduleText;
+let foodoption;
 
 function newUser() {
   let username = document.getElementById("username").value;
@@ -49,8 +52,11 @@ function signupCheck() {
   }
 }
 
-function getschedule() {
-  fetch(url + 'api/capstone/GetTicketsByLocation?destination=Chicago', {
+function getSchedule() {
+  const arrival = document.getElementById("arrival").value;
+  const arrivalValue = arrival + 1;
+
+  fetch(url + 'api/capstone/GetTicketsByLocation?destination=' + arrival, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -66,27 +72,22 @@ function getschedule() {
         return timeDiff >= 1;
       });
 
-
-      if (!tableprinted) {// check if table has been printed before
-        // Render the filtered data in a table
-        const table = document.createElement('table');
-        const headerRow = table.insertRow();
-        headerRow.innerHTML =
-          '<th>TrainSID</th><th>Seat Number</th><th>Destination</th><th>Depart Time</th><th>Arrival Time</th>';
-
-        filteredData.forEach(schedule => {
-          const row = table.insertRow();
-          row.innerHTML =
-            `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
-        });
-
+      if (!tableprinted) { // If table has not been printed before, create new table
+        table = document.createElement('table');
+        const headerRow = table.insertRow(); // create header row
+        headerRow.innerHTML = '<th>TrainSID</th><th>Seat Number</th><th>Destination</th><th>Depart Time</th><th>Arrival Time</th>';
         document.body.appendChild(table);
-        tableprinted = true;// set flag to true
+        tableprinted = true; // set flag to true
       }
+
+      // Add a new table row for each schedule in filteredData
+      filteredData.forEach(schedule => {
+        const row = table.insertRow(1); // insert at top of table
+        row.innerHTML = `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
+      });
 
     })
     .catch(error => console.error(error));
-
 }
 
 function getselectedschedule() {
@@ -118,16 +119,24 @@ function getselectedschedule() {
 
         // Clear existing table rows
         scheduleTableBody.innerHTML = '';
-
         // Render the filtered data in the table
         filteredData.forEach(schedule => {
+
+          schedule.departTime = new Date(schedule.departTime);
+          schedule.arrivalTime = new Date(schedule.arrivalTime);
           const row = document.createElement('tr');
           row.innerHTML =
             `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
           row.addEventListener('click', () => {
             selectedscheduleID = schedule.sid;
+
             selectedScheduleLabel.textContent =
               `Selected Schedule: ${schedule.trainSID} ${schedule.seatNumber} (${schedule.departTime} - ${schedule.arrivalTime})`;
+
+            let selectedSchedule = ` seat number: ${schedule.seatNumber} departure time:  ${schedule.departTime} arrival time: ${schedule.arrivalTime} `;
+            let selectedSchedule1 = JSON.stringify(selectedSchedule);
+            localStorage.setItem("selectedSchedule", selectedSchedule1);
+            console.log(localStorage.getItem("selectedSchedule"));
           });
           scheduleTableBody.appendChild(row);
         });
@@ -139,24 +148,21 @@ function getselectedschedule() {
 }
 
 function purchaseticket() {
-  // const form = document.querySelector('#form');
-  // const foodOptionsid = document.querySelector('#food-options');
-
-  // add an event listener to the form submit event
-  // form.addEventListener('submit', (event) => {
-  //   event.preventDefault();
-  //   let food = form.elements.food.value;
-
   let profile = JSON.parse(localStorage.getItem('profile'));
   console.log(profile);
-  let foodoption = document.getElementById("food-options").value;
+  foodoption = document.getElementById("food-options").value;
   console.log(foodoption);
 
   ticketdata = {
     ticketSID: selectedscheduleID,
-    accountSID: profile.accountSID,
+    accountSID: profile[0].sid,
     foodOptionSID: foodoption,
   };
+  console.log(ticketdata);
+  let ticketdata1 = JSON.stringify(ticketdata);
+  localStorage.setItem("ticketdata", ticketdata1);
+  console.log(localStorage.getItem("ticketdata"));
+
   fetch(url + "api/capstone/PurchaseTicket", {
     method: "POST",
     headers: {
@@ -175,13 +181,38 @@ function purchaseticket() {
       alert('An error occurred. Please try again later.');
     });
 }
+
 function displayTicketData() {
   const ticketContainer = document.getElementById('ticket-container');
+  let ticketdata = JSON.parse(localStorage.getItem("ticketdata"));
+  console.log(ticketdata.ticketSID, ticketdata.accountSID, ticketdata.foodOptionSID);
+  let selectedSchedule2 = JSON.parse(localStorage.getItem("selectedSchedule"));
+  let food;
+  switch (ticketdata.foodOptionSID) {
+    case '1':
+      food = "Halal";
+      break;
+    case '2':
+      food = "Kosher";
+      break;
+    case '3':
+      food = "Meat";
+      break;
+    case '4':
+      food = "Vegan";
+      break;
+    case '5':
+      food = "Vegetarian";
+      break;
+    default: "food not selected";
+      break
+  }
   ticketContainer.innerHTML = `
     <h2>Your Ticket</h2>
-    <p><strong>ticketSID:</strong> ${selectedscheduleID}</p>
-    <p><strong>Schedule:</strong> ${selectedScheduleLabel.textContent}</p>
-    <p><strong>Food Option:</strong> ${ticketdata.foodOptionSID}</p>
+    <p><strong>ticketSID:</strong> ${ticketdata.ticketSID}</p>
+    <p><strong>Schedule:</strong> ${selectedSchedule2} </br> </p>
+    <p><strong>Food Option:</strong> ${food}</p>
   `;
+
 }
 

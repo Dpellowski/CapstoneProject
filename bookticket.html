@@ -332,23 +332,23 @@
                 <tbody></tbody>
             </table>
         </div>
-        <form id="form">
-            <label id="selected-schedule-label"></label>
+        <!-- <form id="form"> -->
+        <label id="selected-schedule-label"></label>
 
-            <table class="class">
-                <tr>
-                    <td> <label for="class">Class:</label></td>
+        <table class="class">
+            <tr>
+                <!-- <td> <label for="class">Class:</label></td>
                     <td>
                         <select id="class" name="class" required>
                             <option value="">Select a class</option>
                             <option value="standard">Standard</option>
                             <option value="first">First</option>
                             <option value="business">Business</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <!-- <div class="passenger-info">
+                        </select> -->
+                </td>
+            </tr>
+        </table>
+        <!-- <div class="passenger-info">
                 <h2>Passenger Information</h2>
                 <label for="passenger-name">Name:</label>
                 <input type="text" id="passenger-name" name="passenger_name" required>
@@ -356,61 +356,61 @@
                 <input type="email" id="passenger-email" name="passenger_email" required>
             </div> -->
 
-            <div class="special-requests">
-                <h2>Special Requests</h2>
-                <table class="Special Requests">
-                    <tr>
-                        <td> <label for="food-options">Choose a food option:</label></td>
-                        <td>
-                            <select id="food-options" name="food">
-                                <option value="null" id="null">select food</option>
-                                <option value="1" id="1">Halal ($15.99)</option>
-                                <option value="2" id="2">Kosher ($18.99)</option>
-                                <option value="3" id="3">Meat ($20.99)</option>
-                                <option value="4" id="4">Vegan ($16.99)</option>
-                                <option value="5" id="5">Vegetable ($12.99)</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="assistance">Is Assistance Required:</label>
-                        </td>
-                        <td>
-                            <select id="assistance" name="assistance">
+        <div class="special-requests">
+            <h2>Special Requests</h2>
+            <table class="Special Requests">
+                <tr>
+                    <td> <label for="food-options">Choose a food option:</label></td>
+                    <td>
+                        <select id="food-options" name="food">
+                            <option value="null" id="null">select food</option>
+                            <option value="1" id="1">Halal ($15.99)</option>
+                            <option value="2" id="2">Kosher ($18.99)</option>
+                            <option value="3" id="3">Meat ($20.99)</option>
+                            <option value="4" id="4">Vegan ($16.99)</option>
+                            <option value="5" id="5">Vegetable ($12.99)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="assistance">Is Assistance Required:</label>
+                    </td>
+                    <td>
+                        <!-- <select id="assistance" name="assistance">
                                 <option value="">Select an assistance</option>
                                 <option value="wheelchair">Wheelchair Assistance</option>
                                 <option value="signlanguage">Sign Language Interpreter</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="Payment Information">
-                <h2>Payment Information</h2>
+                            </select> -->
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="Payment Information">
+            <!-- <h2>Payment Information</h2>
                 <table class="table payment">
                     <tr>
                         <td><label>Credit/Debit Card Number:</label></td>
-                        <td> <input type="text" id="cardnumber" name="cardnumber" required></td>
+                        <td> <input type="text" id="cardnumber" name="cardnumber"></td>
                     </tr>
                     <tr>
                         <td><label>Name on Card:</label></td>
-                        <td> <input type="text" id="cardname" name="cardname" required></td>
+                        <td> <input type="text" id="cardname" name="cardname"></td>
                     </tr>
                     <tr>
                         <td><label>Expiration Date:</label></td>
-                        <td> <input type="month" id="expiry" name="expiry" required></td>
+                        <td> <input type="month" id="expiry" name="expiry"></td>
                     </tr>
                     <tr>
                         <td><label>CVV:</label></td>
-                        <td> <input type="text" id="cvv" name="cvv" required></td>
-                    </tr>
+                        <td> <input type="text" id="cvv" name="cvv"></td>
+                    </tr> -->
 
-                </table>
-            </div>
-            <button onclick="purchaseticket()" type="submit" value="Book Now">Book Now</button>
-            <!-- //<input type="submit" value="Book Now"> -->
-        </form>
+            </table>
+        </div>
+        <button onclick="purchaseticket()" id="submit" type="submit" value="Book Now">Book Now</button>
+        <!-- //<input type="submit" value="Book Now"> -->
+        <!-- </form> -->
         </div>
     </main>
 </body>

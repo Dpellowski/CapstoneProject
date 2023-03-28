@@ -1,200 +1,182 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bullet Train Webpage - Login</title>
-    <style>
-      body {
-        text-align: center;
-      }
 
-      input {
-        height: 40px;
-        margin-left: 10px;
-        font-size: 17px;
-      }
+<head>
+  <title>Bullet Train Webpage - Login</title>
+  <style>
+    body {
+      text-align: center;
+    }
 
-      table tr th:first-child {
-        text-align: right;
-        font-size: 25px;
-      }
+    input {
+      height: 40px;
+      margin-left: 10px;
+      font-size: 17px;
+    }
 
-      table {
-        margin-left: auto;
-        margin-right: auto;
-      }
+    table tr th:first-child {
+      text-align: right;
+      font-size: 25px;
+    }
 
-      td {
-        padding-top: 1%;
-        padding-bottom: 1%;
-      }
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-      .forgot_password {
-        font-size: 18px;
-      }
+    td {
+      padding-top: 1%;
+      padding-bottom: 1%;
+    }
 
-      .forgot_password:hover {
-        font-weight: bold;
-      }
+    .forgot_password {
+      font-size: 18px;
+    }
 
-      .account_not_exist {
-        font-size: 18px;
-      }
+    .forgot_password:hover {
+      font-weight: bold;
+    }
 
-      .account_not_exist:hover {
-        font-weight: bold;
-      }
+    .account_not_exist {
+      font-size: 18px;
+    }
 
-      h2 {
-        font-size: 40px;
-        color: #81c784;
-        font-family: "Fredoka One";
-      }
+    .account_not_exist:hover {
+      font-weight: bold;
+    }
 
-      #loginbtn {
-        background-color: rgb(45, 199, 45);
-        border-radius: 20px;
-        font-size: 18px;
-        width: 8%;
-        height: 40px;
-        font-family: "Times New Roman", Times, serif;
-        font-weight: bold;
-      }
+    h2 {
+      font-size: 40px;
+      color: #81c784;
+      font-family: "Fredoka One";
+    }
 
-      #loginbtn:active {
-        transform: translateY(4px);
-        background-color: rgb(45, 199, 45);
-        box-shadow: 0 2px #666;
-      }
+    #loginbtn {
+      background-color: rgb(45, 199, 45);
+      border-radius: 20px;
+      font-size: 18px;
+      width: 8%;
+      height: 40px;
+      font-family: "Times New Roman", Times, serif;
+      font-weight: bold;
+    }
 
-      strong {
-        font-size: 30px;
-        color: red;
-      }
+    #loginbtn:active {
+      transform: translateY(4px);
+      background-color: rgb(45, 199, 45);
+      box-shadow: 0 2px #666;
+    }
 
-      header {
-        height: fit-content;
-        display: inline-flex;
-        width: 100%;
-      }
+    strong {
+      font-size: 30px;
+      color: red;
+    }
 
-      .navbar {
-        height: 100px;
-        display: inline-block;
-        flex-direction: row;
-        flex: 0 0 100%;
-        /* Let it fill the entire space horizontally */
-        width: 100%;
-      }
+    header {
+      height: fit-content;
+      display: inline-flex;
+      width: 100%;
+    }
 
-      .navbar-homeIcon {
-        height: 100px;
-        width: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    .navbar {
+      height: 100px;
+      display: inline-block;
+      flex-direction: row;
+      flex: 0 0 100%;
+      /* Let it fill the entire space horizontally */
+      width: 100%;
+    }
 
-      .navbar-container-left img {
-        height: inherit;
-        width: 100%;
-        max-width: 100px;
-        max-height: 100px;
-      }
+    .navbar-homeIcon {
+      height: 100px;
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .navbar-container-left {
-        float: left;
-        display: inline-grid;
-        height: 100%;
-        grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr;
-      }
+    .navbar-container-left img {
+      height: inherit;
+      width: 100%;
+      max-width: 100px;
+      max-height: 100px;
+    }
 
-      .navbar-container-left a {
-        font-size: 20px;
-        color: #000000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-      }
+    .navbar-container-left {
+      float: left;
+      display: inline-grid;
+      height: 100%;
+      grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr;
+    }
 
-      .navbar-container-left a:hover:not(:first-child) {
-        font-weight: 700;
-      }
-    </style>
-  </head>
+    .navbar-container-left a {
+      font-size: 20px;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
 
-  <body>
-    <header>
-      <div class="navbar">
-        <div class="navbar-container-left">
-          <a href="index.html">
-            <img
-              class="logo"
-              src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp"
-              alt="Logo"
-          /></a>
+    .navbar-container-left a:hover:not(:first-child) {
+      font-weight: 700;
+    }
+  </style>
+</head>
 
-          <a href="index.html">Home</a>
-          <a href="Trainschedule.php">Train Schedule</a>
-          <a href="bookticket.html">Book Ticket</a>
-          <a href="aboutus.html">About Us</a>
-          <a href="contactus.html">Contact Us</a>
-        </div>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="navbar-container-left">
+        <a href="index.html">
+          <img class="logo"
+            src="https://i.fbcd.co/products/resized/resized-750-500/1004-ff00287f81b6351d6c3ff7b3378a00d0a4a5457cbff98964e4e2206bc75f05ab.webp"
+            alt="Logo" /></a>
+
+        <a href="index.html">Home</a>
+        <a href="Trainschedule.php">Train Schedule</a>
+        <a href="login.html">Book Ticket</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
       </div>
-    </header>
-    <div>
-      <h2>Log in</h2>
     </div>
+  </header>
+  <div>
+    <h2>Log in</h2>
+  </div>
 
-    <div class="email_table">
-      <table>
-        <tr>
-          <th>Email:</th>
-          <td>
-            <input
-              type="text"
-              name="login_user"
-              size="50"
-              placeholder="Enter your username/email address"
-              required="true"
-              id="email"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th>Password:</th>
-          <td>
-            <input
-              type="password"
-              name="login_password"
-              size="50"
-              placeholder="Enter your password"
-              required="true"
-              id="password"
-            />
-          </td>
-        </tr>
-      </table>
-    </div>
-    <br />
-    <div class="submitbtn">
-      <input
-        onclick="returnText()"
-        type="submit"
-        id="loginbtn"
-        name="request_login"
-        value="Login"
-      />
-    </div>
+  <div class="email_table">
+    <table>
+      <tr>
+        <th>Email:</th>
+        <td>
+          <input type="text" name="login_user" size="50" placeholder="Enter your username/email address" required="true"
+            id="email" />
+        </td>
+      </tr>
+      <tr>
+        <th>Password:</th>
+        <td>
+          <input type="password" name="login_password" size="50" placeholder="Enter your password" required="true"
+            id="password" />
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br />
+  <div class="submitbtn">
+    <input onclick="returnText()" type="submit" id="loginbtn" name="request_login" value="Login" />
+  </div>
 
-    <br />
-    <div class="forgot_password">
-      <a href="forgot_password.php">Forgot password?</a>
-    </div>
-    <br />
-    <div class="account_not_exist">
-      <a href="Signup_page.php">Don't have an account?</a>
-    </div>
-    <script src="login.js"></script>
-  </body>
+  <br />
+  <div class="forgot_password">
+    <a href="forgot_password.php">Forgot password?</a>
+  </div>
+  <br />
+  <div class="account_not_exist">
+    <a href="Signup_page.php">Don't have an account?</a>
+  </div>
+  <script src="login.js"></script>
+</body>
+
 </html>
