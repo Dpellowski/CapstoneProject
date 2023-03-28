@@ -174,7 +174,9 @@ function purchaseticket() {
     .then((response) => (data = response))
     .then(data => {
       console.log(data);
-      window.location.href = 'http://localhost/CapstoneProject/ticket.html';
+      if (data > 0) {
+        window.location.href = 'http://localhost/CapstoneProject/ticket.html';
+      }
     })
     .catch(error => {
       console.error('Error:', error);
