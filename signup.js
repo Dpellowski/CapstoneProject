@@ -44,7 +44,7 @@ function signupCheck() {
 
   } else {
     //display error on the screen
-    console.log("Fail signup");
+    alert("Failed to sign up!");
   }
 }
 
