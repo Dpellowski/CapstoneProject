@@ -39,7 +39,7 @@ function signupCheck() {
   if (profile > 0) {
     console.log(profile);
     window.location.replace(
-      "http://localhost/CapstoneProject/userProfile.php"
+      "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.php"
     );
 
   } else {
