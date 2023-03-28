@@ -2,6 +2,7 @@ let profile;
 let url = "https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/";
 let tableprinted = false;// flag variable
 let selectedscheduleID;
+let ticketdata;
 
 function newUser() {
   let username = document.getElementById("username").value;
@@ -39,7 +40,7 @@ function signupCheck() {
   if (profile > 0) {
     console.log(profile);
     window.location.replace(
-      "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.php"
+      "http://localhost/CapstoneProject/userProfile.php"
     );
 
   } else {
@@ -108,7 +109,6 @@ function getselectedschedule() {
       .then(response => response.json())
       .then(data => {
         const filteredData = data.filter(schedule => {
-          selectedscheduleID = new Date(schedule.sID);
           const departTime = new Date(schedule.departTime);
           const currentTime = new Date();
           const timeDiff = (departTime - currentTime) / (1000 * 60 *
@@ -125,6 +125,7 @@ function getselectedschedule() {
           row.innerHTML =
             `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
           row.addEventListener('click', () => {
+            selectedscheduleID = schedule.sid;
             selectedScheduleLabel.textContent =
               `Selected Schedule: ${schedule.trainSID} ${schedule.seatNumber} (${schedule.departTime} - ${schedule.arrivalTime})`;
           });
@@ -138,55 +139,49 @@ function getselectedschedule() {
 }
 
 function purchaseticket() {
-  const form = document.querySelector('#form');
-  const foodOptionsid = document.querySelector('#food-options');
+  // const form = document.querySelector('#form');
+  // const foodOptionsid = document.querySelector('#food-options');
 
   // add an event listener to the form submit event
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    let food = form.elements.food.value;
+  // form.addEventListener('submit', (event) => {
+  //   event.preventDefault();
+  //   let food = form.elements.food.value;
 
-    // get the selected food option sid
-    // const selectedOption = foodOptionsid.options[foodOptionsid.selectedIndex];
-    // const foodOptionSID = selectedOption.getAttribute('sid');
+  let profile = JSON.parse(localStorage.getItem('profile'));
+  console.log(profile);
+  let foodoption = document.getElementById("food-options").value;
+  console.log(foodoption);
 
-    // check that all required variables are defined
-    if (!selectedscheduleID) {
-      console.error('selectedscheduleID is undefined');
-      return;
-    }
-    if (!profile || !profile.accountSID) {
-      console.error('profile or profile.accountSID is undefined');
-      return;
-    }
-    if (!food) {
-      console.error('foodOptionSID is undefined');
-      return;
-    }
-    if (ticketSID === null || accountSID === null) {
-      alert('An error occurred. Please try again later.');
-      return;
-    }
-    fetch(url + "api/capstone/PurchaseTicket", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ticketSID: selectedscheduleID,
-        accountSID: profile.accountSID,
-        foodOptionSID: food,
-      }),
+  ticketdata = {
+    ticketSID: selectedscheduleID,
+    accountSID: profile.accountSID,
+    foodOptionSID: foodoption,
+  };
+  fetch(url + "api/capstone/PurchaseTicket", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(ticketdata),
+  })
+    .then(response => response.json())
+    .then((response) => (data = response))
+    .then(data => {
+      console.log(data);
+      window.location.href = 'http://localhost/CapstoneProject/ticket.html';
     })
-      .then(response => response.json())
-      .then((response) => (data = response))
-      .then(data => {
-        console.log(data);
-        window.location.href = 'http://localhost/bullet%20train/ticket.html';
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
-      });
-  });
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    });
 }
+function displayTicketData() {
+  const ticketContainer = document.getElementById('ticket-container');
+  ticketContainer.innerHTML = `
+    <h2>Your Ticket</h2>
+    <p><strong>ticketSID:</strong> ${selectedscheduleID}</p>
+    <p><strong>Schedule:</strong> ${selectedScheduleLabel.textContent}</p>
+    <p><strong>Food Option:</strong> ${ticketdata.foodOptionSID}</p>
+  `;
+}
+
