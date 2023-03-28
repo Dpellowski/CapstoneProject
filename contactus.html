@@ -179,7 +179,7 @@
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #333;
+            background-color: #1abc9c;
             color: #fff;
             border-radius: 5px;
             text-decoration: none;
@@ -188,7 +188,7 @@
         }
 
         .btn:hover {
-            background-color: #666;
+            background-color: #16a085;
         }
     </style>
 </head>
@@ -213,7 +213,8 @@
     <main>
         <h1>Contact Us</h1>
         <div class="container">
-            <form method="post" action="send-email.php">
+            <form method="post" action="mailto:info@Bullettrain.com?subject=Message from website&body=
+            Message: ${document.getElementById('message').value}" method="post" enctype="text/plain">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>

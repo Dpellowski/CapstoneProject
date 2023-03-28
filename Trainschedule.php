@@ -308,8 +308,13 @@
         button:hover {
             background-color: #16a085;
         }
-    </style>
 
+        img {
+            height: 300px;
+            width: 500px;
+        }
+    </style>
+    <script src="signup.js"></script>
 </head>
 
 <body>
@@ -324,20 +329,25 @@
                 <a href="bookticket.html">Book Ticket</a>
                 <a href="aboutus.html">About Us</a>
                 <a href="contactus.html">Contact Us</a>
-                <div class="dropdown">
+
+                <!-- <div class="dropdown">
                     <img class="dropbtn" src="https://pic.onlinewebfonts.com/svg/img_24787.png" style="width:40px;height:40px;">
                     <div class="dropdown-content">
                         <a href="userProfile.html">Account</a>
                         <a href="edit-profile.php">Security</a>
                         <a href="logout_msg.html">Log out</a>
                     </div>
-                </div>
+                </div> -->
+                <div class="container"></div>
+                <script>
+                    showDropdown()
+                </script>
             </div>
         </div>
     </header>
     <main>
         <div class="image">
-            <img src="https://blog.bit.ai/wp-content/uploads/2020/07/schedule-concept-illustration_114360-1531.jpg" alt="Train schedule" style="size: 30%">
+            <img src="https://img.freepik.com/free-vector/schedule-concept-illustration_114360-1531.jpg?w=826&t=st=1680036683~exp=1680037283~hmac=c101d301215a0166b38e5d908a31b9771b64fd70a05e96f65467778c7f66238b" alt="Train schedule">
         </div>
         <table class="no-border">
             <tr>
@@ -354,8 +364,8 @@
                 </td>
             </tr>
         </table>
-        <script src="signup.js">
-        </script>
+        <!-- <script src="signup.js">
+        </script> -->
     </main>
 </body>
 

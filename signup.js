@@ -216,3 +216,49 @@ function displayTicketData() {
 
 }
 
+function showDropdown() {
+  const profile = localStorage.getItem('profile');
+  if (profile) {
+    // document.querySelector('dropdown').style.display = 'block';
+    // create container element for dropdown menu
+    const dropdownContainer = document.createElement('div');
+    dropdownContainer.classList.add('dropdown');
+
+    // create button element for dropdown menu
+    const dropdownBtn = document.createElement('img');
+    dropdownBtn.classList.add('dropbtn');
+    dropdownBtn.setAttribute('src', 'https://pic.onlinewebfonts.com/svg/img_24787.png');
+    dropdownBtn.setAttribute('style', 'width:40px;height:40px;');
+
+    // create content element for dropdown menu
+    const dropdownContent = document.createElement('div');
+    dropdownContent.classList.add('dropdown-content');
+
+    // create links for dropdown menu
+    const accountLink = document.createElement('a');
+    accountLink.setAttribute('href', 'userProfile.html');
+    accountLink.textContent = 'Account';
+
+    const securityLink = document.createElement('a');
+    securityLink.setAttribute('href', 'edit-profile.php');
+    securityLink.textContent = 'Security';
+
+    const logoutLink = document.createElement('a');
+    logoutLink.setAttribute('href', 'logout_msg.html');
+    logoutLink.textContent = 'Log out';
+
+    // append links to dropdown content
+    dropdownContent.appendChild(accountLink);
+    dropdownContent.appendChild(securityLink);
+    dropdownContent.appendChild(logoutLink);
+
+    // append button and content to container
+    dropdownContainer.appendChild(dropdownBtn);
+    dropdownContainer.appendChild(dropdownContent);
+
+    // get container element in DOM and append dropdown menu
+    const container = document.querySelector('#container');
+    container.appendChild(dropdownContainer);
+
+  }
+}
