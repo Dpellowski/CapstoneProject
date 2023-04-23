@@ -1,11 +1,12 @@
 let profile;
-let url = "https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/";
+let url = "https://9509-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/";
 let table;
 let tableprinted = false;// flag variable
 let selectedscheduleID;
 let ticketdata;
 let scheduleText;
 let foodoption;
+
 
 function newUser() {
   let username = document.getElementById("username").value;
@@ -20,7 +21,7 @@ function newUser() {
   // console.log(email);
   // console.log(password);
 
-  fetch("https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/api/capstone/CreateUser", {
+  fetch("https://9509-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/capstone/CreateUser", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -43,7 +44,7 @@ function signupCheck() {
   if (profile > 0) {
     console.log(profile);
     window.location.replace(
-      "http://localhost/CapstoneProject/userProfile.php"
+      "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.html"
     );
 
   } else {
@@ -175,7 +176,7 @@ function purchaseticket() {
     .then(data => {
       console.log(data);
       if (data > 0) {
-        window.location.href = 'http://localhost/CapstoneProject/ticket.html';
+        window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/ticket.html';
       }
     })
     .catch(error => {
@@ -264,3 +265,47 @@ function showDropdown() {
 
   }
 }
+ 
+function changePassword(){
+  let profile = JSON.parse(localStorage.getItem('profile'));
+  console.log(profile);
+  const form = document.getElementById('updatePassword');
+  const newPassword = document.getElementById('new_password').value;
+
+  account = {
+    accountSID: profile[0].sid,
+    newPassword: newPassword
+  };
+  console.log(account);
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    // Make an API request to change the password using the input values
+    fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/ReplacePassword', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(account)
+    })
+    .then(response => {
+      if (response.ok) {
+        // Handle the API response to display a success message to the user
+        alert('Password changed successfully.');
+        window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/login.html';
+      } else {
+        // Handle the API response to display an error message to the user
+        alert('Password change failed. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    });
+  })
+  };
+
+
+
+
