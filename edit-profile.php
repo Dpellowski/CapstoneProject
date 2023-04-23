@@ -223,6 +223,7 @@
             font-weight: bold;
         }
     </style>
+    <script src="signup.js"></script>
 </head>
 
 <body>
@@ -251,30 +252,8 @@
         </div>
     </header>
     <h1><u>Edit Profile</u></h1>
-    <h2><u>Change Email Address</u></h2>
-    <form action="#process-edit-profile" method="post">
-        <table>
-            <tr>
-                <th>Current Email:</th>
-                <td>abc@gmail.com</td>
-            </tr>
-            <tr>
-                <th>New Email Address:</th>
-                <td> <input type="text" id="new_address" name="new_address" size="50" placeholder="Enter New Email Address" pattern="[a-zA-Z0-9._]+@[a-z].+[a-z]"></td>
-            </tr>
-            <tr>
-                <th>Confirm New Email Address:</th>
-                <td><input type="text" id="confirm_address" name="confirm_address" size="50" placeholder="Re-Enter New Email Address" pattern="[a-zA-Z0-9._]+@[a-z].+[a-z]"></td>
-            </tr>
-        </table>
-        <div style="text-align:center">
-            <button type="submit" name="updateEmail" value="updateEmail" class="submitbtn">Update Email</button>
-        </div>
-    </form>
 
-    <h2><u>Change Password</u></h2>
-
-    <form action="#process-edit-profile" method="post">
+    <form id="updatePassword" method="post">
         <div>
             <table>
                 <tr>
@@ -285,14 +264,10 @@
                     <th>New Password:</th>
                     <td> <input type="password" id="new_password" name="new_password" size="50" placeholder="Enter New Password"></td>
                 </tr>
-                <tr>
-                    <th>Confirm New Password:</th>
-                    <td><input type="password" id="confirm_password" name="confirm_password" size="50" placeholder="Re-Enter New Password"></td>
-                </tr>
             </table>
         </div>
         <div style="text-align:center">
-            <button type="submit" name="updatePw" value="updatePw" class="submitbtn">Update Password</button>
+            <button type="submit" id="change" onclick="changePassword()" name="updatePw" value="updatePw" class="submitbtn">Update Password</button>
         </div>
     </form>
 
