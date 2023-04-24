@@ -236,7 +236,7 @@ function showDropdown() {
     accountLink.textContent = 'Account';
 
     const securityLink = document.createElement('a');
-    securityLink.setAttribute('href', 'edit-profile.php');
+    securityLink.setAttribute('href', 'forgot_password.php');
     securityLink.textContent = 'Security';
 
     const logoutLink = document.createElement('a');
@@ -327,7 +327,7 @@ function getPassword(){
         console.log(email);
         
         if (email > 0) {
-          localStorage.setItem("email", email);
+         // localStorage.setItem("email", email);
           window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/view_bookingHistory.php';
         }
       })
@@ -336,6 +336,10 @@ function getPassword(){
         alert('An error occurred. Please try again later.');
       });
     }
+
+
+
+
 
 
 
