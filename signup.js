@@ -368,7 +368,7 @@ function getPassword() {
 function getBookHistory() {
   let profile = JSON.parse(localStorage.getItem('profile'));
 
-  fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/GetAccountTickets', {
+  fetch(url + 'api/capstone/GetAccountTickets', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -413,4 +413,4 @@ function getBookHistory() {
       console.error('Error:', error);
       alert('An error occurred. Please try again later.');
     });
-  }
+}
