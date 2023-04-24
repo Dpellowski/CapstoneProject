@@ -303,7 +303,7 @@ function getPassword() {
 function getBookHistory() {
   let profile = JSON.parse(localStorage.getItem('profile'));
 
-  fetch(`${url}api/capstone/GetAccountTickets`, {
+  fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/GetAccountTickets', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -313,29 +313,39 @@ function getBookHistory() {
       email: profile[0].email
     }),
   })
-    .then((response) => response.json())
-    .then((response) => (email = response))
-    .then(email => {
-      console.log(email);
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
 
-      if (email > 0) {
-        // localStorage.setItem("email", email);
-        window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/view_bookingHistory.php';
+      // Create a new table element
+      let table = document.createElement("table");
+
+      // Add the headers to the table
+      let headers = Object.keys(data[0]);
+      let headerRow = document.createElement("tr");
+      for (let i = 0; i < headers.length; i++) {
+        let headerCell = document.createElement("th");
+        headerCell.innerText = headers[i];
+        headerRow.appendChild(headerCell);
       }
+      table.appendChild(headerRow);
+
+      // Add the data rows to the table
+      for (let i = 0; i < data.length; i++) {
+        let dataRow = document.createElement("tr");
+        for (let j = 0; j < headers.length; j++) {
+          let dataCell = document.createElement("td");
+          dataCell.innerText = data[i][headers[j]];
+          dataRow.appendChild(dataCell);
+        }
+        table.appendChild(dataRow);
+      }
+
+      // Append the table to the DOM
+      document.body.appendChild(table);
     })
     .catch(error => {
       console.error('Error:', error);
       alert('An error occurred. Please try again later.');
     });
-}
-
-
-
-
-
-
-
-
-
-
-
+  }
