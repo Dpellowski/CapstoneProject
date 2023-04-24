@@ -15,11 +15,6 @@ function newUser() {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
 
-  // console.log(username); 
-  // console.log(fname); 
-  // console.log(lname);
-  // console.log(email);
-  // console.log(password);
 
   fetch("https://9509-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/capstone/CreateUser", {
     method: "POST",
@@ -42,7 +37,6 @@ function newUser() {
 
 function signupCheck() {
   if (profile > 0) {
-    console.log(profile);
     window.location.replace(
       "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.html"
     );
@@ -137,7 +131,7 @@ function getselectedschedule() {
             let selectedSchedule = ` seat number: ${schedule.seatNumber} departure time:  ${schedule.departTime} arrival time: ${schedule.arrivalTime} `;
             let selectedSchedule1 = JSON.stringify(selectedSchedule);
             localStorage.setItem("selectedSchedule", selectedSchedule1);
-            console.log(localStorage.getItem("selectedSchedule"));
+            
           });
           scheduleTableBody.appendChild(row);
         });
@@ -150,19 +144,19 @@ function getselectedschedule() {
 
 function purchaseticket() {
   let profile = JSON.parse(localStorage.getItem('profile'));
-  console.log(profile);
+  
   foodoption = document.getElementById("food-options").value;
-  console.log(foodoption);
+  
 
   ticketdata = {
     ticketSID: selectedscheduleID,
     accountSID: profile[0].sid,
     foodOptionSID: foodoption,
   };
-  console.log(ticketdata);
+  
   let ticketdata1 = JSON.stringify(ticketdata);
   localStorage.setItem("ticketdata", ticketdata1);
-  console.log(localStorage.getItem("ticketdata"));
+  
 
   fetch(url + "api/capstone/PurchaseTicket", {
     method: "POST",
@@ -174,7 +168,7 @@ function purchaseticket() {
     .then(response => response.json())
     .then((response) => (data = response))
     .then(data => {
-      console.log(data);
+      
       if (data > 0) {
         window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/ticket.html';
       }
@@ -188,7 +182,6 @@ function purchaseticket() {
 function displayTicketData() {
   const ticketContainer = document.getElementById('ticket-container');
   let ticketdata = JSON.parse(localStorage.getItem("ticketdata"));
-  console.log(ticketdata.ticketSID, ticketdata.accountSID, ticketdata.foodOptionSID);
   let selectedSchedule2 = JSON.parse(localStorage.getItem("selectedSchedule"));
   let food;
   switch (ticketdata.foodOptionSID) {
@@ -266,21 +259,18 @@ function showDropdown() {
   }
 }
  
-function changePassword(){
+//For forgot password page 
+function resetPassword() {
   let profile = JSON.parse(localStorage.getItem('profile'));
-  console.log(profile);
-  const form = document.getElementById('updatePassword');
-  const newPassword = document.getElementById('new_password').value;
+  const newPassword = document.getElementById('newPW').value;
+  let confirm = document.getElementById('confirm_newPW').value;
 
   account = {
     accountSID: profile[0].sid,
     newPassword: newPassword
   };
-  console.log(account);
 
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-
+  if(confirm == newPassword){
     // Make an API request to change the password using the input values
     fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/ReplacePassword', {
       method: 'POST',
@@ -303,9 +293,54 @@ function changePassword(){
       console.error('Error:', error);
       alert('An error occurred. Please try again later.');
     });
-  })
-  };
+  } else {
+    alert("Confirmation failed. Please try again.");
+  }
+}
+
+function passwordCheck(){
+  const form = document.getElementById('updatePassword');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    resetPassword();
+  });
+}
+
+  
+
+  function getBookHistory(){
+    let profile = JSON.parse(localStorage.getItem('profile'));
+   
+    fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/GetAccountTickets', {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: profile[0].email
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => (email = response))
+      .then(email => {
+        console.log(email);
+        
+        if (email > 0) {
+          localStorage.setItem("email", email);
+          window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/view_bookingHistory.php';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+      });
+    }
 
 
 
 
+  
+  
+  
+  
