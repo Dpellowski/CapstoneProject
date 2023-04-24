@@ -298,7 +298,7 @@ function resetPassword() {
   }
 }
 
-function passwordCheck(){
+function getPassword(){
   const form = document.getElementById('updatePassword');
   form.addEventListener('submit', event => {
     event.preventDefault();

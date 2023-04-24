@@ -160,7 +160,7 @@
         </table>
         <br />
         <div class="submitbtn">
-            <input type="submit" onclick="passwordCheck()" id="reset_PW_btn" name="reset_PW_btn" value="Reset password" />
+            <input type="submit" onclick="getPassword()" id="reset_PW_btn" name="reset_PW_btn" value="Reset password" />
         </div>
     </form>
     <br />
