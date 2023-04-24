@@ -132,7 +132,7 @@
 
                 <a href="index.html">Home</a>
                 <a href="Trainschedule.php">Train Schedule</a>
-                <a href="bookticket.html">Book Ticket</a>
+                <a href="forgot_password.php">Book Ticket</a>
                 <a href="aboutus.html">About Us</a>
                 <a href="contactus.html">Contact Us</a>
             </div>

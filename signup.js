@@ -48,7 +48,12 @@ function signupCheck() {
     alert("Failed to sign up!");
   }
 }
-
+/**
+ * Retrieves train schedules from the server based on the user's selected arrival location and displays them in a table.
+ * @function
+ * @name getSchedule
+ * @returns {void}
+ */
 function getSchedule() {
   // Get the user's selected arrival location
   const arrival = document.getElementById("arrival").value;
@@ -77,7 +82,7 @@ function getSchedule() {
       if (!tableprinted) {
         table = document.createElement('table');
         const headerRow = table.insertRow(); // create header row
-        headerRow.innerHTML = '<th>TrainSID</th><th>Seat Number</th><th>Destination</th><th>Depart Time</th><th>Arrival Time</th>';
+        headerRow.innerHTML = '<th>TrainSID</th><th>Seat Number</th><th>Departure Station</th><th>Destination</th><th>Depart Time</th><th>Arrival Time</th>';
         document.body.appendChild(table);
         tableprinted = true; // set flag to true
       }
@@ -85,7 +90,7 @@ function getSchedule() {
       // Add a new table row for each schedule in filteredData
       filteredData.forEach(schedule => {
         const row = table.insertRow(1); // insert at top of table
-        row.innerHTML = `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
+        row.innerHTML = `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.departStation}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
       });
 
     })

@@ -330,18 +330,18 @@
                 <a href="aboutus.html">About Us</a>
                 <a href="contactus.html">Contact Us</a>
 
-                <!-- <div class="dropdown">
+                <div class="dropdown">
                     <img class="dropbtn" src="https://pic.onlinewebfonts.com/svg/img_24787.png" style="width:40px;height:40px;">
                     <div class="dropdown-content">
                         <a href="userProfile.html">Account</a>
                         <a href="edit-profile.php">Security</a>
                         <a href="logout_msg.html">Log out</a>
                     </div>
-                </div> -->
-                <div class="container"></div>
+                </div>
+                <!-- <div class="container"></div>
                 <script>
                     showDropdown()
-                </script>
+                </script> -->
             </div>
         </div>
     </header>
@@ -359,13 +359,12 @@
                         <option value="Denver">Denver</option>
                         <option value="Salt Lake City">Salt Lake City</option>
                         <option value="California">California</option>
+                        <option value="Boston">Boston</option>
                     </select>
                     <button type="submit" onclick="getSchedule()">Search</button>
                 </td>
             </tr>
         </table>
-        <!-- <script src="signup.js">
-        </script> -->
     </main>
 </body>
 
