@@ -285,3 +285,78 @@ scheduleTableBody.addEventListener('click', event => {
     // Set the value of the hidden input field in the delete form to the schedule ID
     deleteForm.elements.scheduleSID.value = scheduleSID;
 });
+
+/**
+ * This function is responsible for approving refunds for train tickets. It fetches ticket data from the API and generates a table row for each ticket. It also adds click event listeners to the approve buttons, which send a POST request to the API to approve the refund for the corresponding ticket.
+ * @function approverefund
+ * @returns {void}
+ */
+function approverefund() {
+
+    // Get a reference to the table body element
+    const tableBody = document.getElementById('ticketTableBody');
+
+    // Define a function to generate a table row for a ticket object
+    function generateTableRow(ticket) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${ticket.sid}</td>
+        <td>${ticket.trainSID}</td>
+        <td>${ticket.seatNumber}</td>
+        <td>${ticket.destination}</td>
+        <td>${ticket.departStation}</td>
+        <td>${ticket.departTime}</td>
+        <td>${ticket.arrivalTime}</td>
+        <td>${ticket.accountSID}</td>
+        <td>${ticket.foodSID}</td>
+        <td><button class="approveButton" data-ticket-sid="${ticket.sid}">Approve</button></td>
+    `;
+        return row;
+    }
+
+    // Define a function to fetch ticket data from the API and generate table rows
+    function generateTableRows() {
+        fetch(`${url}api/capstone/RequestRefund`)
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the array of tickets and generate a table row for each one
+                data.forEach(ticket => {
+                    const row = generateTableRow(ticket);
+                    tableBody.appendChild(row);
+                });
+
+                // Add click event listeners to the approve buttons
+                const approveButtons = document.querySelectorAll('.approveButton');
+                approveButtons.forEach(approveButton => {
+                    approveButton.addEventListener('click', () => {
+                        const ticketSID = approveButton.dataset.ticketSid;
+                        const requestBody = { ticketSID };
+                        fetch(`${url}api/capstone/ApproveRefund`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(requestBody)
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Log the response from the API for debugging purposes
+                                console.log(data);
+                            })
+                            .catch(error => {
+                                // Handle errors that occur while sending the POST request
+                                console.error(error);
+                            });
+                    });
+                });
+            })
+            .catch(error => {
+                // Handle errors that occur while fetching the ticket data
+                console.error(error);
+            });
+    }
+
+    // Call the generateTableRows function to initialize the table
+    generateTableRows();
+
+}

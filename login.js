@@ -31,8 +31,14 @@ function loginCheck() {
       window.location.replace(
         "http://localhost/CapstoneProject/userProfile.html"
       );
-    } else {
+    } else if ((profile.accountTypeSID = 1)) {
       //send to admin page
+      window.location.replace(
+        "http://localhost/CapstoneProject/adminProfile.html"
+      );
+    } else {
+      //display error on the screen
+      alert("Login Failed!");
     }
   } else {
     //display error on the screen

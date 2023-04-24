@@ -1,11 +1,13 @@
 let profile;
-let url = "https://9509-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/";
+let url = "https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/";
 let table;
 let tableprinted = false;// flag variable
 let selectedscheduleID;
 let ticketdata;
 let scheduleText;
 let foodoption;
+let destination;
+let totalPrice;
 
 
 function newUser() {
@@ -48,9 +50,12 @@ function signupCheck() {
 }
 
 function getSchedule() {
+  // Get the user's selected arrival location
   const arrival = document.getElementById("arrival").value;
+  // Add 1 to the arrival location value
   const arrivalValue = arrival + 1;
 
+  // Send a POST request to the server to retrieve train schedules for the selected arrival location
   fetch(url + 'api/capstone/GetTicketsByLocation?destination=' + arrival, {
     method: 'POST',
     headers: {
@@ -60,6 +65,7 @@ function getSchedule() {
   })
     .then(response => response.json())
     .then(data => {
+      // Filter the retrieved data to only include schedules departing at least 1 hour from the current time
       const filteredData = data.filter(schedule => {
         const departTime = new Date(schedule.departTime);
         const currentTime = new Date();
@@ -67,7 +73,8 @@ function getSchedule() {
         return timeDiff >= 1;
       });
 
-      if (!tableprinted) { // If table has not been printed before, create new table
+      // If the table has not been printed before, create a new table with a header row
+      if (!tableprinted) {
         table = document.createElement('table');
         const headerRow = table.insertRow(); // create header row
         headerRow.innerHTML = '<th>TrainSID</th><th>Seat Number</th><th>Destination</th><th>Depart Time</th><th>Arrival Time</th>';
@@ -93,7 +100,7 @@ function getselectedschedule() {
 
   searchForm.addEventListener('submit', event => {
     event.preventDefault();
-    const destination = searchForm.elements.destination.value;
+    destination = searchForm.elements.destination.value;
 
     fetch(`${url}api/capstone/GetTicketsByLocation?destination=${destination}`, {
       method: 'POST',
@@ -117,21 +124,21 @@ function getselectedschedule() {
         // Render the filtered data in the table
         filteredData.forEach(schedule => {
 
+
           schedule.departTime = new Date(schedule.departTime);
           schedule.arrivalTime = new Date(schedule.arrivalTime);
           const row = document.createElement('tr');
           row.innerHTML =
-            `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
+            `<td>${schedule.trainSID}</td><td>${schedule.seatNumber}</td><td>${schedule.departStation}</td><td>${schedule.destination}</td><td>${schedule.departTime}</td><td>${schedule.arrivalTime}</td>`;
           row.addEventListener('click', () => {
             selectedscheduleID = schedule.sid;
-
             selectedScheduleLabel.textContent =
               `Selected Schedule: ${schedule.trainSID} ${schedule.seatNumber} (${schedule.departTime} - ${schedule.arrivalTime})`;
 
             let selectedSchedule = ` seat number: ${schedule.seatNumber} departure time:  ${schedule.departTime} arrival time: ${schedule.arrivalTime} `;
             let selectedSchedule1 = JSON.stringify(selectedSchedule);
             localStorage.setItem("selectedSchedule", selectedSchedule1);
-            
+            console.log(localStorage.getItem("selectedSchedule"));
           });
           scheduleTableBody.appendChild(row);
         });
@@ -143,20 +150,26 @@ function getselectedschedule() {
 }
 
 function purchaseticket() {
+  const confirmed = confirm(`Are you sure you want to purchase this ticket?`);
+
+  // If the user cancels the deletion, return without doing anything
+  if (!confirmed) {
+    return;
+  }
   let profile = JSON.parse(localStorage.getItem('profile'));
-  
+  // console.log(profile);
   foodoption = document.getElementById("food-options").value;
-  
+  // console.log(foodoption);
 
   ticketdata = {
     ticketSID: selectedscheduleID,
     accountSID: profile[0].sid,
     foodOptionSID: foodoption,
   };
-  
+  // console.log(ticketdata);
   let ticketdata1 = JSON.stringify(ticketdata);
   localStorage.setItem("ticketdata", ticketdata1);
-  
+
 
   fetch(url + "api/capstone/PurchaseTicket", {
     method: "POST",
@@ -168,7 +181,7 @@ function purchaseticket() {
     .then(response => response.json())
     .then((response) => (data = response))
     .then(data => {
-      
+
       if (data > 0) {
         window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/ticket.html';
       }
@@ -178,7 +191,29 @@ function purchaseticket() {
       alert('An error occurred. Please try again later.');
     });
 }
+function price() {
+  const foodOptions = document.getElementById("food-options");
+  const searchSelect = document.getElementById("search-select");
+  const ticketPrice = 80;
+  const totalPriceLabel = document.getElementById("total-price");
 
+  foodOptions.addEventListener("change", checkForm);
+  searchSelect.addEventListener("change", checkForm);
+
+  function checkForm() {
+    const foodValue = foodOptions.value;
+    const searchValue = searchSelect.value;
+    if (foodValue !== "null" && searchValue !== "null") {
+      const selectedOption = foodOptions.options[foodOptions.selectedIndex];
+      const price = selectedOption.dataset.price;
+      totalPrice = parseFloat(price) + ticketPrice;
+      totalPriceLabel.textContent = `Total price = $${totalPrice.toFixed(2)}`;
+      totalPriceLabel.style.display = "block";
+    } else {
+      totalPriceLabel.style.display = "none";
+    }
+  }
+}
 function displayTicketData() {
   const ticketContainer = document.getElementById('ticket-container');
   let ticketdata = JSON.parse(localStorage.getItem("ticketdata"));
@@ -208,57 +243,11 @@ function displayTicketData() {
     <p><strong>ticketSID:</strong> ${ticketdata.ticketSID}</p>
     <p><strong>Schedule:</strong> ${selectedSchedule2} </br> </p>
     <p><strong>Food Option:</strong> ${food}</p>
+    <p><strong>Total Price:</strong> ${totalPrice}</p>
   `;
 
 }
 
-function showDropdown() {
-  const profile = localStorage.getItem('profile');
-  if (profile) {
-    // document.querySelector('dropdown').style.display = 'block';
-    // create container element for dropdown menu
-    const dropdownContainer = document.createElement('div');
-    dropdownContainer.classList.add('dropdown');
-
-    // create button element for dropdown menu
-    const dropdownBtn = document.createElement('img');
-    dropdownBtn.classList.add('dropbtn');
-    dropdownBtn.setAttribute('src', 'https://pic.onlinewebfonts.com/svg/img_24787.png');
-    dropdownBtn.setAttribute('style', 'width:40px;height:40px;');
-
-    // create content element for dropdown menu
-    const dropdownContent = document.createElement('div');
-    dropdownContent.classList.add('dropdown-content');
-
-    // create links for dropdown menu
-    const accountLink = document.createElement('a');
-    accountLink.setAttribute('href', 'userProfile.html');
-    accountLink.textContent = 'Account';
-
-    const securityLink = document.createElement('a');
-    securityLink.setAttribute('href', 'forgot_password.php');
-    securityLink.textContent = 'Security';
-
-    const logoutLink = document.createElement('a');
-    logoutLink.setAttribute('href', 'logout_msg.html');
-    logoutLink.textContent = 'Log out';
-
-    // append links to dropdown content
-    dropdownContent.appendChild(accountLink);
-    dropdownContent.appendChild(securityLink);
-    dropdownContent.appendChild(logoutLink);
-
-    // append button and content to container
-    dropdownContainer.appendChild(dropdownBtn);
-    dropdownContainer.appendChild(dropdownContent);
-
-    // get container element in DOM and append dropdown menu
-    const container = document.querySelector('#container');
-    container.appendChild(dropdownContainer);
-
-  }
-}
- 
 //For forgot password page 
 function resetPassword() {
   let profile = JSON.parse(localStorage.getItem('profile'));
@@ -270,35 +259,35 @@ function resetPassword() {
     newPassword: newPassword
   };
 
-  if(confirm == newPassword){
+  if (confirm == newPassword) {
     // Make an API request to change the password using the input values
-    fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/ReplacePassword', {
+    fetch(`${url}api/capstone/ReplacePassword`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(account)
     })
-    .then(response => {
-      if (response.ok) {
-        // Handle the API response to display a success message to the user
-        alert('Password changed successfully.');
-        window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/login.html';
-      } else {
-        // Handle the API response to display an error message to the user
-        alert('Password change failed. Please try again.');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
-    });
+      .then(response => {
+        if (response.ok) {
+          // Handle the API response to display a success message to the user
+          alert('Password changed successfully.');
+          window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/login.html';
+        } else {
+          // Handle the API response to display an error message to the user
+          alert('Password change failed. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+      });
   } else {
     alert("Confirmation failed. Please try again.");
   }
 }
 
-function getPassword(){
+function getPassword() {
   const form = document.getElementById('updatePassword');
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -306,36 +295,34 @@ function getPassword(){
   });
 }
 
-  
+function getBookHistory() {
+  let profile = JSON.parse(localStorage.getItem('profile'));
 
-  function getBookHistory(){
-    let profile = JSON.parse(localStorage.getItem('profile'));
-   
-    fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/GetAccountTickets', {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: profile[0].email
-      }),
+  fetch(`${url}api/capstone/GetAccountTickets`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: profile[0].email
+    }),
+  })
+    .then((response) => response.json())
+    .then((response) => (email = response))
+    .then(email => {
+      console.log(email);
+
+      if (email > 0) {
+        // localStorage.setItem("email", email);
+        window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/view_bookingHistory.php';
+      }
     })
-      .then((response) => response.json())
-      .then((response) => (email = response))
-      .then(email => {
-        console.log(email);
-        
-        if (email > 0) {
-         // localStorage.setItem("email", email);
-          window.location.href = 'http://localhost/ICS499_CapstoneProject/CapstoneProject/view_bookingHistory.php';
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
-      });
-    }
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    });
+}
 
 
 
@@ -344,7 +331,6 @@ function getPassword(){
 
 
 
-  
-  
-  
-  
+
+
+
