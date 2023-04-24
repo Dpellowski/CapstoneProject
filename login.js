@@ -1,5 +1,5 @@
 let profile;
-let url = "https://2954-2601-444-80-a6c0-3b-41d9-1216-4265.ngrok.io/";
+let url = "https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/";
 
 function returnText() {
   let email = document.getElementById("email").value;
@@ -29,7 +29,7 @@ function loginCheck() {
     console.log(localStorage.getItem("profile"));
     if ((profile.accountTypeSID = 2)) {
       window.location.replace(
-        "http://localhost/CapstoneProject/userProfile.html"
+        "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.html"
       );
     } else if ((profile.accountTypeSID = 1)) {
       //send to admin page
