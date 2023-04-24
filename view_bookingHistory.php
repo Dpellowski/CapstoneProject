@@ -221,9 +221,10 @@
             background-color: #add8e6;
         }
     </style>
+    <script src="signup.js"></script>
 </head>
 
-<body>
+<body onload="getBookHistory()">
     <header>
         <div class="navbar">
             <div class="navbar-container-left">
@@ -242,7 +243,7 @@
                 <img class="dropbtn" src="http://cdn.onlinewebfonts.com/svg/img_569204.png" style="width:40px;height:40px;">
                 <div class="dropdown-content">
                     <a href="userProfile.html">Account</a>
-                    <a href="edit-profile.php">Security</a>
+                    <a href="forgot_password.php">Security</a>
                     <a href="logout_msg.html">Log out</a>
                 </div>
             </div>
@@ -255,67 +256,8 @@
                 Refund</button></a>
     </div>
     <br />
+    <div id="table"></div>
 
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Train Name</th>
-            <th>Passenger(s)</th>
-            <th>Starting location</th>
-            <th>Destination</th>
-            <th>One-way/Round-trip</th>
-            <th>Food Option</th>
-            <th>Total price</th>
-
-        </tr>
-        <tr>
-            <td>May 10</td>
-            <td>10:30 AM</td>
-            <td>Acela Express </td>
-            <td>2</td>
-            <td>California_station1</td>
-            <td>Nevada_station1</td>
-            <td>Round-trip</td>
-            <td>Kosher</td>
-            <td>$80</td>
-
-        </tr>
-        <tr>
-            <td>August 5</td>
-            <td>9:00 AM</td>
-            <td>Avelia Liberty</td>
-            <td>2</td>
-            <td>Pennsylvania_station2</td>
-            <td>New York_station 1</td>
-            <td>One-way</td>
-            <td>Kosher</td>
-            <td>$200</td>
-
-        </tr>
-        <tr>
-            <td>March 2</td>
-            <td>11:00 AM</td>
-            <td>Avelia Liberty</td>
-            <td>2</td>
-            <td>California_station1</td>
-            <td>Utah_station2</td>
-            <td>Round-trip</td>
-            <td>Meat</td>
-            <td>$100</td>
-        </tr>
-        <tr>
-            <td>December 12</td>
-            <td>1:30 PM</td>
-            <td>Acela Express</td>
-            <td>2</td>
-            <td>California_station1</td>
-            <td>Utah_station2</td>
-            <td>Round-trip</td>
-            <td>Meat</td>
-            <td>$160</td>
-        </tr>
-    </table>
 </body>
 
 </html>
