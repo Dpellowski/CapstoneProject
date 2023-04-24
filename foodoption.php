@@ -217,7 +217,7 @@
                     <img class="dropbtn" src="https://pic.onlinewebfonts.com/svg/img_24787.png" style="width:40px;height:40px;">
                     <div class="dropdown-content">
                         <a href="user_setting.php">Account</a>
-                        <a href="edit-profile.php">Security</a>
+                        <a href="forgot_password.php">Security</a>
                         <a href="logout.php">Log out</a>
                     </div>
                 </div>

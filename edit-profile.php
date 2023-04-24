@@ -245,7 +245,7 @@
                 <img class="dropbtn" src="http://cdn.onlinewebfonts.com/svg/img_569204.png" style="width:40px;height:40px;">
                 <div class="dropdown-content">
                     <a href="userProfile.html">Account</a>
-                    <a href="edit-profile.php">Security</a>
+                    <a href="forgot_password.php">Security</a>
                     <a href="logout_msg.html">Log out</a>
                 </div>
             </div>
@@ -267,7 +267,7 @@
             </table>
         </div>
         <div style="text-align:center">
-            <button type="submit" id="change" onclick="changePassword()" name="updatePw" value="updatePw" class="submitbtn">Update Password</button>
+            <button type="submit" id="change" onclick="updatePassword()" name="updatePw" value="updatePw" class="submitbtn">Update Password</button>
         </div>
     </form>
 

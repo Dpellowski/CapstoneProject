@@ -120,6 +120,7 @@
             font-size: 19px;
         }
     </style>
+    <script src="signup.js"></script>
 </head>
 
 <body>
@@ -142,24 +143,26 @@
     </div>
     <h1 align="center">Reset Password</h1>
     <br />
-    <table>
-        <tr>
-            <th>New password:</th>
-            <td>
-                <input type="text" name="newPW" size="50" min="6" placeholder="Enter your password." required="true" />
-            </td>
-        </tr>
-        <tr>
-            <th>Confirm new password:</th>
-            <td>
-                <input type="password" name="confirm_newPW" size="50" placeholder="Re-enter your new password." required="true" />
-            </td>
-        </tr>
-    </table>
-    <br />
-    <div class="submitbtn">
-        <input type="submit" id="reset_PW_btn" name="reset_PW_btn" value="Reset password" />
-    </div>
+    <form id="updatePassword" method="post">
+        <table>
+            <tr>
+                <th>New password:</th>
+                <td>
+                    <input type="text" id="newPW" name="newPW" size="50" min="6" placeholder="Enter your password." required="true" />
+                </td>
+            </tr>
+            <tr>
+                <th>Confirm new password:</th>
+                <td>
+                    <input type="password" id="confirm_newPW" name="confirm_newPW" size="50" placeholder="Re-enter your new password." required="true" />
+                </td>
+            </tr>
+        </table>
+        <br />
+        <div class="submitbtn">
+            <input type="submit" onclick="getPassword()" id="reset_PW_btn" name="reset_PW_btn" value="Reset password" />
+        </div>
+    </form>
     <br />
     <div class="goback">
         <span>Go back to </span>
