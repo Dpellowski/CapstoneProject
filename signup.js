@@ -1,5 +1,5 @@
 let profile;
-let url = "https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/ ";
+let url = "https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/";
 let table;
 let tableprinted = false;// flag variable
 let selectedscheduleID;
