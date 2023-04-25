@@ -274,26 +274,6 @@
         #search-form {
             margin-top: 20px;
         }
-
-        section {
-            display: -webkit-flex;
-            display: flex;
-        }
-
-        /* Style left panel */
-        aside {
-            -webkit-flex: 2;
-            -ms-flex: 2;
-            flex: 2;
-            background: #ccc;
-        }
-
-        article {
-            -webkit-flex: 3;
-            -ms-flex: 3;
-            flex: 3;
-            background-color: #fff;
-        }
     </style>
     <script src="signup.js"></script>
 </head>
@@ -325,127 +305,69 @@
         </div>
     </header>
     <main>
-        <section>
-            <aside>
-                <h1>Recommended Places</h1>
-                <label for="countryInput">Enter a country name:</label>
-                <input type="text" id="countryInput">
-                <button id="submitBtn">Search</button>
-                <br><br>
-                <table id="resultsTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Category</th>
-                            <th>Visitors</th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultsBody">
-                    </tbody>
-                </table>
+        <div class="image">
+            <img src="https://img.freepik.com/free-vector/online-calendar-concept-illustration_114360-5036.jpg?w=996&t=st=1680036618~exp=1680037218~hmac=7484632061a4b9da631ed8242428d6c6ddb10317f4994a7d6f52311f9825a1c6"
+                alt="fill the form">
+        </div>
 
-                <script>
-                    const baseURL = 'https://api.tomtom.com/search/2/';
-                    const apiKey = 'YOUR_API_KEY';
+        <h2>Travel Details</h2>
 
-                    const submitBtn = document.getElementById('submitBtn');
-                    const countryInput = document.getElementById('countryInput');
-                    const resultsBody = document.getElementById('resultsBody');
+        <form id="search-form">
+            <label for="search-select">Select a destination:</label>
+            <select id="search-select" name="destination" required>
+                <option value="null" id="null">select Destination</option>
+                <option value="New York">New York</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Denver">Denver</option>
+                <option value="Salt Lake City">Salt Lake City</option>
+                <option value="California">California</option>
+                <option value="Boston">Boston</option>
+            </select>
+            <input onclick="getselectedschedule()" type="submit" value="Search">
+        </form>
+        <div id="schedule-box">
+            <table id="schedule-table">
+                <thead>
+                    <tr>
+                        <th>TrainSID</th>
+                        <th>Seat Number</th>
+                        <th>Departure</th>
+                        <th>Destination</th>
+                        <th>Depart Time</th>
+                        <th>Arrival Time</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
-                    submitBtn.addEventListener('click', () => {
-                        const countryName = countryInput.value;
-                        const url = `${baseURL}search/${encodeURIComponent(countryName)}.json?key=${apiKey}&categorySet=7320004&limit=5`;
+        <label id="selected-schedule-label"></label>
 
-                        fetch(url)
-                            .then(response => response.json())
-                            .then(data => {
-                                const results = data.results;
+        <div class="special-requests">
+            <h2>Special Requests</h2>
+            <table class="Special Requests">
+                <tr>
+                    <td> <label for="food-options">Choose a food option:</label></td>
+                    <td>
+                        <select id="food-options" name="food">
+                            <option value="null" id="null">select food</option>
+                            <option value="1" id="1" data-price="15.99">Halal ($15.99)</option>
+                            <option value="2" id="2" data-price="18.99">Kosher ($18.99)</option>
+                            <option value="3" id="3" data-price="20.99">Meat ($20.99)</option>
+                            <option value="4" id="4" data-price="16.99">Vegan ($16.99)</option>
+                            <option value="5" id="5" data-price="12.99">Vegetable ($12.99)</option>
+                        </select>
+                        <label id="total-price" style="display:none;"></label>
+                        <script>
+                            price();                                    
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button onclick="purchaseticket()" id="submit" type="submit" value="Book Now">Book Now</button>
 
-                                // Clear previous results
-                                resultsBody.innerHTML = '';
-
-                                // Add new results to table
-                                results.forEach(result => {
-                                    const name = result.poi.name;
-                                    const address = result.address.freeformAddress;
-                                    const category = result.poi.categories[0].name;
-                                    const visitors = result.poi.visitors;
-
-                                    const row = document.createElement('tr');
-                                    row.innerHTML = `<td>${name}</td><td>${address}</td><td>${category}</td><td>${visitors}</td>`;
-
-                                    resultsBody.appendChild(row);
-                                });
-                            })
-                            .catch(error => console.error(error));
-                    });
-                </script>
-            </aside>
-            <article>
-                <div class="image">
-                    <img src="https://img.freepik.com/free-vector/online-calendar-concept-illustration_114360-5036.jpg?w=996&t=st=1680036618~exp=1680037218~hmac=7484632061a4b9da631ed8242428d6c6ddb10317f4994a7d6f52311f9825a1c6"
-                        alt="fill the form">
-                </div>
-
-                <h2>Travel Details</h2>
-
-                <form id="search-form">
-                    <label for="search-select">Select a destination:</label>
-                    <select id="search-select" name="destination" required>
-                        <option value="null" id="null">select Destination</option>
-                        <option value="New York">New York</option>
-                        <option value="Chicago">Chicago</option>
-                        <option value="Denver">Denver</option>
-                        <option value="Salt Lake City">Salt Lake City</option>
-                        <option value="California">California</option>
-                        <option value="Boston">Boston</option>
-                    </select>
-                    <input onclick="getselectedschedule()" type="submit" value="Search">
-                </form>
-                <div id="schedule-box">
-                    <table id="schedule-table">
-                        <thead>
-                            <tr>
-                                <th>TrainSID</th>
-                                <th>Seat Number</th>
-                                <th>Departure</th>
-                                <th>Destination</th>
-                                <th>Depart Time</th>
-                                <th>Arrival Time</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <!-- <form id="form"> -->
-                <label id="selected-schedule-label"></label>
-
-                <div class="special-requests">
-                    <h2>Special Requests</h2>
-                    <table class="Special Requests">
-                        <tr>
-                            <td> <label for="food-options">Choose a food option:</label></td>
-                            <td>
-                                <select id="food-options" name="food">
-                                    <option value="null" id="null">select food</option>
-                                    <option value="1" id="1" data-price="15.99">Halal ($15.99)</option>
-                                    <option value="2" id="2" data-price="18.99">Kosher ($18.99)</option>
-                                    <option value="3" id="3" data-price="20.99">Meat ($20.99)</option>
-                                    <option value="4" id="4" data-price="16.99">Vegan ($16.99)</option>
-                                    <option value="5" id="5" data-price="12.99">Vegetable ($12.99)</option>
-                                </select>
-                                <label id="total-price" style="display:none;"></label>
-                                <script>
-                                    price();                                    
-                                </script>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <button onclick="purchaseticket()" id="submit" type="submit" value="Book Now">Book Now</button>
-
-                </div>
+        </div>
     </main>
 </body>
 
