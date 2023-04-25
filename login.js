@@ -27,11 +27,11 @@ function loginCheck() {
     let profileJson = JSON.stringify(profile);
     localStorage.setItem("profile", profileJson);
     console.log(localStorage.getItem("profile"));
-    if ((profile.accountTypeSID = 2)) {
+    if ((profile.accountTypeSID == 2)) {
       window.location.replace(
         "http://localhost/ICS499_CapstoneProject/CapstoneProject/userProfile.html"
       );
-    } else if ((profile.accountTypeSID = 1)) {
+    } else if ((profile.accountTypeSID == 1)) {
       //send to admin page
       window.location.replace(
         "http://localhost/ICS499_CapstoneProject/CapstoneProject/adminProfile.html"
