@@ -10,6 +10,7 @@ let destination;
 let totalPrice;
 
 
+
 function newUser() {
   let username = document.getElementById("username").value;
   let fname = document.getElementById("fname").value;
@@ -18,7 +19,7 @@ function newUser() {
   let password = document.getElementById("password").value;
 
 
-  fetch(url + 'api/capstone/CreateUser', {
+  fetch("https://9509-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/capstone/CreateUser", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -46,22 +47,6 @@ function signupCheck() {
   } else {
     //display error on the screen
     alert("Failed to sign up!");
-  }
-}
-
-function onStart() {
-  let profile = JSON.parse(localStorage.getItem("profile"));
-  display(profile);
-}
-
-function display(profile) {
-  console.log(profile);
-  if (document.getElementById("email") != null) {
-    document.getElementById("email").innerHTML = profile[0].email;
-  }
-
-  if (document.getElementById("username") != null) {
-    document.getElementById("username").innerHTML = profile[0].name;
   }
 }
 /**
@@ -112,17 +97,7 @@ function getSchedule() {
     })
     .catch(error => console.error(error));
 }
-/**
- * This function clears the existing table rows and renders the filtered data in the table.
- * It also adds a click event listener to each row that sets the selected schedule ID and label,
- * and stores the selected schedule in local storage.
- *
- * @param {Array} filteredData - An array of schedule objects that have been filtered based on user input.
- * @param {HTMLElement} scheduleTableBody - The table body element where the filtered data will be rendered.
- * @param {HTMLElement} scheduleBox - The container element for the schedule table.
- * @param {HTMLElement} selectedScheduleLabel - The label element that displays the selected schedule information.
- * @param {Number} selectedscheduleID - The ID of the currently selected schedule.
- */
+
 function getselectedschedule() {
   const searchForm = document.querySelector('#search-form');
   const scheduleBox = document.querySelector('#schedule-box');
@@ -179,12 +154,7 @@ function getselectedschedule() {
       .catch(error => console.error(error));
   });
 }
-/**
- * This function is responsible for purchasing a ticket for a selected schedule and storing the ticket data in local storage.
- * @function purchaseticket
- * @returns {void}
- * @throws {Error} If an error occurs during the fetch request, an error message will be displayed to the user.
- */
+
 function purchaseticket() {
   const confirmed = confirm(`Are you sure you want to purchase this ticket?`);
 
@@ -227,28 +197,6 @@ function purchaseticket() {
       alert('An error occurred. Please try again later.');
     });
 }
-/**
- * This function calculates the total price of a ticket and food option selected by the user.
- * It listens for changes in the food options and search select elements and updates the total price accordingly.
- * @function
- * @name price
- * 
- * @returns {void}
- * 
- * @example
- * // Call the price function to calculate the total price
- * price();
- */
-
-/**
- * This function checks if both the food option and search select elements have been selected by the user.
- * If both elements have been selected, it calculates the total price and displays it on the page.
- * If either element has not been selected, it hides the total price label.
- * @function
- * @name checkForm
- * 
- * @returns {void}
- */
 function price() {
   const foodOptions = document.getElementById("food-options");
   const searchSelect = document.getElementById("search-select");
@@ -272,14 +220,6 @@ function price() {
     }
   }
 }
-/**
- * This function displays the ticket data on the ticket container element in the HTML document.
- * It retrieves the ticket data and selected schedule from the local storage and formats the food option.
- * The function then sets the innerHTML of the ticket container element to display the ticket information.
- * @function
- * @name displayTicketData
- * @returns {void}
- */
 function displayTicketData() {
   const ticketContainer = document.getElementById('ticket-container');
   let ticketdata = JSON.parse(localStorage.getItem("ticketdata"));
@@ -314,20 +254,7 @@ function displayTicketData() {
 
 }
 
-//For forgot password page 
-/**
- * This function is responsible for resetting the user's password by making an API request to change the password using the input values.
- * @function resetPassword
- * @returns {void}
- * @throws {Error} If an error occurs while making the API request.
- */
-
-/**
- * Retrieves the user's profile from local storage and gets the new password and confirmation password from the input fields.
- * Constructs an account object with the user's accountSID and the new password.
- * @function resetPassword
- * @returns {void}
- */
+//For forgot password page
 function resetPassword() {
   let profile = JSON.parse(localStorage.getItem('profile'));
   const newPassword = document.getElementById('newPW').value;
@@ -373,14 +300,8 @@ function getPassword() {
     resetPassword();
   });
 }
-/**
- * Retrieves the booking history of the user from the server and redirects to the booking history page.
- * @function
- * @name getBookHistory
- * @returns {void}
- * @throws {Error} If an error occurs while fetching the booking history from the server.
- * @description This function retrieves the booking history of the user from the server by sending a POST request to the server's "GetAccountTickets" API endpoint. The email of the user is sent as a parameter in the request body. If the request is successful, the function redirects the user to the booking history page. If an error occurs while fetching the booking history from the server, an error message is displayed to the user.
- */
+
+
 function getBookHistory() {
   let profile = JSON.parse(localStorage.getItem('profile'));
 
@@ -395,14 +316,20 @@ function getBookHistory() {
     }),
   })
     .then(response => response.json())
-    .then(data => {
-      console.log(data);
+    .then(ticketInfo => {
+      console.log(ticketInfo);
+
+      let getInfo = JSON.stringify(ticketInfo);
+      localStorage.setItem("ticketInfo", getInfo);
+      
+     // console.log(JSON.parse(getInfo)[0].sid);
 
       // Create a new table element
-      let table = document.createElement("table");
+      table = document.createElement("table");
 
       // Add the headers to the table
-      let headers = Object.keys(data[0]);
+      let headers = Object.keys(ticketInfo[0]);
+      // Add a new header for the checkbox
       let headerRow = document.createElement("tr");
       for (let i = 0; i < headers.length; i++) {
         let headerCell = document.createElement("th");
@@ -412,21 +339,76 @@ function getBookHistory() {
       table.appendChild(headerRow);
 
       // Add the data rows to the table
-      for (let i = 0; i < data.length; i++) {
+      for (let i = 0; i < ticketInfo.length; i++) {
         let dataRow = document.createElement("tr");
         for (let j = 0; j < headers.length; j++) {
           let dataCell = document.createElement("td");
-          dataCell.innerText = data[i][headers[j]];
+          if (j == headers.length - 1) { // Add a checkbox to the last column
+            let button = document.createElement("button");
+            button.innerText = "Request Refund";
+            button.value = ticketInfo[i][headers[0]];
+            button.addEventListener("click", function() {
+              requestRefund();
+            });
+            dataCell.appendChild(button);
+          } else {
+            dataCell.innerText = ticketInfo[i][headers[j]];
+          }
           dataRow.appendChild(dataCell);
         }
         table.appendChild(dataRow);
       }
-
       // Append the table to the DOM
-      document.body.appendChild(table);
+      document.getElementById("refundTable").appendChild(table);
     })
     .catch(error => {
       console.error('Error:', error);
       alert('An error occurred. Please try again later.');
     });
 }
+
+function requestRefund(){
+  let ticketInfo = JSON.parse(localStorage.getItem("ticketInfo"));
+  let selectedTicketSID;
+
+  // Loop through the table rows to find the selected ticket
+  let rows = table.getElementsByTagName("tr");
+  for (let i = 1; i < rows.length; i++) { // Skip the header row
+    let button = rows[i].getElementsByTagName("button")[0];
+    if (button === event.target) {
+      selectedTicketSID = ticketInfo[i-1].sid;
+      break;
+    }
+  }
+
+  fetch(url + 'api/capstone/RequestRefund', {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ticketSID : selectedTicketSID
+    })
+  })
+  .then(response => response.json())
+  .then(info => {
+    console.log(info);
+    let sidInfo = JSON.stringify(info);
+    localStorage.setItem("info", sidInfo);
+    alert("Request is successfully sent.");
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+  });
+}
+
+
+
+
+
+
+
+
+    
