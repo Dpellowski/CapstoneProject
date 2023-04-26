@@ -49,7 +49,7 @@
             background-color: rgb(45, 199, 45);
             border-radius: 20px;
             font-size: 18px;
-            width: 8%;
+            width: 10%;
             height: 40px;
             font-family: "Times New Roman", Times, serif;
             font-weight: bold;
@@ -119,11 +119,6 @@
         .goback {
             font-size: 19px;
         }
-
-        input {
-
-            box-shadow: 0 2px #666;
-        }
     </style>
     <script src="signup.js"></script>
 </head>
@@ -165,7 +160,7 @@
         </table>
         <br />
         <div class="submitbtn">
-            <input type="submit" onclick="getPassword()" id="reset_PW_btn" name="reset_PW_btn" value="Reset password" />
+            <input type="submit" onclick="getPassword()" class="reset_PW_btn" id="reset_PW_btn" name="reset_PW_btn" value="Reset password" />
         </div>
     </form>
     <br />
