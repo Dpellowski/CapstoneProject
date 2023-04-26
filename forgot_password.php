@@ -119,6 +119,11 @@
         .goback {
             font-size: 19px;
         }
+
+        input {
+
+            box-shadow: 0 2px #666;
+        }
     </style>
     <script src="signup.js"></script>
 </head>
@@ -148,7 +153,7 @@
             <tr>
                 <th>New password:</th>
                 <td>
-                    <input type="text" id="newPW" name="newPW" size="50" min="6" placeholder="Enter your password." required="true" />
+                    <input type="password" id="newPW" name="newPW" size="50" min="6" placeholder="Enter your password." required="true" />
                 </td>
             </tr>
             <tr>
