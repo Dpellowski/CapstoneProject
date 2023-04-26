@@ -65,7 +65,7 @@ function addSchedule() {
     formData.append("departTime", departTime);
     formData.append("arrivalTime", arrivalTime);
 
-    fetch(`${url}api/capstone/CreateNewTickets`, {
+    fetch('https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/api/capstone/CreateNewTickets', {
         method: 'POST',
         body: formData
     })
@@ -209,9 +209,29 @@ function getselectedschedule() {
             .catch(error => console.error(error));
     });
 }
+
 /**
  * This function shows or hides a delete form when the delete button is clicked.
  * @function showdeleteform
+ * @returns {void}
+ */
+/**
+ * The showFormBtn variable stores the delete button element.
+ * @const {HTMLElement} showFormBtn
+ */
+
+/**
+ * The hiddenForm variable stores the delete form element.
+ * @const {HTMLElement} hiddenForm
+ */
+
+/**
+ * The click event listener is added to the delete button element.
+ * When the button is clicked, the function checks the current display style of the delete form.
+ * If the display style is 'none', the function changes it to 'block' to show the form.
+ * If the display style is 'block', the function changes it to 'none' to hide the form.
+ * If the display style is anything else, the function changes it to 'none' to hide the form.
+ * @listens click
  * @returns {void}
  */
 function showdeleteform() {
@@ -285,7 +305,6 @@ scheduleTableBody.addEventListener('click', event => {
     // Set the value of the hidden input field in the delete form to the schedule ID
     deleteForm.elements.scheduleSID.value = scheduleSID;
 });
-
 /**
  * This function is responsible for approving refunds for train tickets. It fetches ticket data from the API and generates a table row for each ticket. It also adds click event listeners to the approve buttons, which send a POST request to the API to approve the refund for the corresponding ticket.
  * @function approverefund
