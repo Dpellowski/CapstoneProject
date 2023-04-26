@@ -19,7 +19,7 @@ function newUser() {
   let password = document.getElementById("password").value;
 
 
-  fetch("https://9509-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/capstone/CreateUser", {
+  fetch("https://29f2-2601-444-80-a6c0-6ca7-6f1-c036-e864.ngrok-free.app/capstone/CreateUser", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -321,8 +321,8 @@ function getBookHistory() {
 
       let getInfo = JSON.stringify(ticketInfo);
       localStorage.setItem("ticketInfo", getInfo);
-      
-     // console.log(JSON.parse(getInfo)[0].sid);
+
+      // console.log(JSON.parse(getInfo)[0].sid);
 
       // Create a new table element
       table = document.createElement("table");
@@ -347,7 +347,7 @@ function getBookHistory() {
             let button = document.createElement("button");
             button.innerText = "Request Refund";
             button.value = ticketInfo[i][headers[0]];
-            button.addEventListener("click", function() {
+            button.addEventListener("click", function () {
               requestRefund();
             });
             dataCell.appendChild(button);
@@ -367,7 +367,7 @@ function getBookHistory() {
     });
 }
 
-function requestRefund(){
+function requestRefund() {
   let ticketInfo = JSON.parse(localStorage.getItem("ticketInfo"));
   let selectedTicketSID;
 
@@ -376,7 +376,7 @@ function requestRefund(){
   for (let i = 1; i < rows.length; i++) { // Skip the header row
     let button = rows[i].getElementsByTagName("button")[0];
     if (button === event.target) {
-      selectedTicketSID = ticketInfo[i-1].sid;
+      selectedTicketSID = ticketInfo[i - 1].sid;
       break;
     }
   }
@@ -388,20 +388,20 @@ function requestRefund(){
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      ticketSID : selectedTicketSID
+      ticketSID: selectedTicketSID
     })
   })
-  .then(response => response.json())
-  .then(info => {
-    console.log(info);
-    let sidInfo = JSON.stringify(info);
-    localStorage.setItem("info", sidInfo);
-    alert("Request is successfully sent.");
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
-  });
+    .then(response => response.json())
+    .then(info => {
+      console.log(info);
+      let sidInfo = JSON.stringify(info);
+      localStorage.setItem("info", sidInfo);
+      alert("Request is successfully sent.");
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    });
 }
 
 
@@ -411,4 +411,3 @@ function requestRefund(){
 
 
 
-    
